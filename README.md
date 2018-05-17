@@ -1,2 +1,2 @@
 # Galaxy.Intruders
-Space Invaders 
+Space Invaders but better!
