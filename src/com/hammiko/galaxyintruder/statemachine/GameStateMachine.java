@@ -1,7 +1,7 @@
 package com.hammiko.galaxyintruder.statemachine;
 
 import com.hammiko.galaxyintruder.states.GameState;
-import com.hammiko.galaxyintruder.states.MenuState;
+import com.hammiko.galaxyintruder.states.GameStateFactory;
 
 /**
  * Singleton
@@ -9,20 +9,20 @@ import com.hammiko.galaxyintruder.states.MenuState;
 public class GameStateMachine {
 
     private static GameStateMachine instance = null;
-    private GameState activeState;
-
-    private GameStateMachine(GameState startState) {
-        activeState = startState;
-    }
+    private GameState activeState = new GameStateFactory().create();
 
     public static GameStateMachine getInstance() {
 
         if (GameStateMachine.instance == null) {
-            GameStateMachine.instance = new GameStateMachine(new MenuState());
+            GameStateMachine.instance = new GameStateMachine();
         }
 
         return GameStateMachine.instance;
 
+    }
+
+    public void update(){
+        this.activeState.update();
     }
 
     public GameState getActiveState() {
@@ -32,6 +32,5 @@ public class GameStateMachine {
     public void changeState(GameState gameState) {
         this.activeState = gameState;
     }
-
 
 }

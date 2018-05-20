@@ -1,7 +1,7 @@
 package com.hammiko.galaxyintruder.game;
 
 import com.hammiko.galaxyintruder.statemachine.GameStateMachine;
-import com.hammiko.galaxyintruder.window.GameFrame;
+import com.hammiko.galaxyintruder.window.Screen;
 
 public class Game implements Runnable {
 
@@ -10,10 +10,10 @@ public class Game implements Runnable {
 
     private GameStateMachine gsm;
 
-    private GameFrame gameFrame;
+    private Screen gameFrame;
     private Thread gameThread;
 
-    public Game(GameFrame frame, GameStateMachine gsm) {
+    public Game(Screen frame, GameStateMachine gsm) {
         this.gameFrame = frame;
         this.gsm = gsm;
     }
@@ -35,6 +35,8 @@ public class Game implements Runnable {
         gameFrame.setOnCloseEvent(this::stopGame);
         gameFrame.setActiveView(gsm.getActiveState().getView());
 
+        gameFrame.addKeyListener(gsm.getActiveState().getInput());
+
         while (isRunning) {
 
             long now = System.nanoTime();
@@ -46,15 +48,14 @@ public class Game implements Runnable {
                 update();
                 delta--;
                 updates++;
-                render();
                 frames++;
 
             }
 
             if (System.currentTimeMillis() - timer > 1000) {
 
-                timer += 1000;
                 gameFrame.setTitle(gameTitle + "  |   " + updates + " ups, " + frames + " fps");
+                timer += 1000;
                 updates = 0;
                 frames = 0;
 
@@ -66,11 +67,7 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        gsm.getActiveState().update();
-    }
-
-    private void render() {
-        gsm.getActiveState().render();
+        gsm.update();
     }
 
     public void setIsRunning(boolean isRunning) {
