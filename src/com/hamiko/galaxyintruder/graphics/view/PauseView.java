@@ -1,0 +1,17 @@
+package com.hamiko.galaxyintruder.graphics.view;
+
+import java.awt.*;
+
+public class PauseView extends GameView{
+
+    Graphics2D graphic;
+    @Override
+    public void paintComponent(Graphics g){
+        graphic = (Graphics2D) g;
+    }
+
+    public void update(){
+
+    }
+
+}
