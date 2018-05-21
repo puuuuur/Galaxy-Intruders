@@ -8,17 +8,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Screen gameFrame = new Screen();
+        Screen screen = Screen.getInstance();
 
         Game game = new Game(
-
-                gameFrame,
+                screen,
                 GameStateMachine.getInstance()
-
         );
 
         Thread gameThread = new Thread(game, "GAME_THREAD");
-        Thread screenThread = new Thread(gameFrame, "SCREEN_THREAD");
+        Thread screenThread = new Thread(screen, "SCREEN_THREAD");
         game.setGameThread(gameThread);
 
         screenThread.start();

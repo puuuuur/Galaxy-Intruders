@@ -9,29 +9,57 @@ import java.awt.event.WindowEvent;
 
 public class Screen extends JFrame implements Runnable {
 
-    private static int width = 300;
-    private static int height = width / 16 * 9;
-    private static int scale = 3;
+    private static Screen instance;
+
+    public class Constant {
+        public static final int BASE_WIDTH = 1920;
+        public static final int BASE_HEIGHT = 1080;
+    }
+
+    private double xScale;
+    private double yScale;
 
     private boolean isRunning = false;
+    private boolean isFullScreen = false;
+    private static Dimension fullScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public Screen() {
+    private ResolutionMap resolutions = new ResolutionMap();
 
-        /* TODO Use this for full screen mode after building proper game exit
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            setUndecorated(true);
-         */
+    public static Screen getInstance() {
 
-        Dimension screenSize = new Dimension(width * scale, height * scale);
+        if (Screen.instance == null) {
+            Screen.instance = new Screen();
+        }
 
-        setPreferredSize(screenSize);
+        return Screen.instance;
+
+    }
+
+    private Screen() {
+
+        //setUndecorated(true);
+        //TODO remove deco when full screen on
+        //TODO if a set resolution exceeds the possible one, prevent OR scale down to monitor nativ
+        //TODO support ultra wide screen mode?
+
+        this.createScreenSize(resolutions.getResolution(Resolution._720p));
         setResizable(false);
         setFocusable(true);
-        pack();
         setLocationRelativeTo(null);
         setVisible(true);
         setBackground(Color.yellow);
 
+    }
+
+    public void createScreenSize(Dimension screenSize) {
+        setPreferredSize(screenSize);
+        setScreenScale(screenSize);
+        pack();
+    }
+
+    private void setScreenScale(Dimension screenSize) {
+        xScale = screenSize.width / (double)Constant.BASE_WIDTH;
+        yScale = screenSize.height / (double)Constant.BASE_HEIGHT;
     }
 
     public void setActiveView(GameView view) {
@@ -65,6 +93,14 @@ public class Screen extends JFrame implements Runnable {
             this.repaint();
         }
 
+    }
+
+    public double xScale() {
+        return xScale;
+    }
+
+    public double yScale() {
+        return yScale;
     }
 
 }

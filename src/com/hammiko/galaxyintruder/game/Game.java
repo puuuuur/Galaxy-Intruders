@@ -10,11 +10,11 @@ public class Game implements Runnable {
 
     private GameStateMachine gsm;
 
-    private Screen gameFrame;
+    private Screen screen;
     private Thread gameThread;
 
-    public Game(Screen frame, GameStateMachine gsm) {
-        this.gameFrame = frame;
+    public Game(Screen screen, GameStateMachine gsm) {
+        this.screen = screen;
         this.gsm = gsm;
     }
 
@@ -31,11 +31,11 @@ public class Game implements Runnable {
         int frames = 0;
         int updates = 0;
 
-        gameFrame.requestFocus();
-        gameFrame.setOnCloseEvent(this::stopGame);
-        gameFrame.setActiveView(gsm.getActiveState().getView());
+        screen.requestFocus();
+        screen.setOnCloseEvent(this::stopGame);
+        screen.setActiveView(gsm.getActiveState().getView());
 
-        gameFrame.addKeyListener(gsm.getActiveState().getInput());
+        screen.addKeyListener(gsm.getActiveState().getInput());
 
         while (isRunning) {
 
@@ -54,7 +54,7 @@ public class Game implements Runnable {
 
             if (System.currentTimeMillis() - timer > 1000) {
 
-                gameFrame.setTitle(gameTitle + "  |   " + updates + " ups, " + frames + " fps");
+                screen.setTitle(gameTitle + "  |   " + updates + " ups, " + frames + " fps");
                 timer += 1000;
                 updates = 0;
                 frames = 0;

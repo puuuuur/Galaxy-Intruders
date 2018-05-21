@@ -1,20 +1,27 @@
 package com.hammiko.galaxyintruder.graphics.view;
 
+import com.hammiko.galaxyintruder.graphics.ScaledGraphics;
 import com.hammiko.galaxyintruder.input.MenuInput;
 
 import java.awt.*;
 
 public class MenuView extends GameView {
 
-    Graphics2D graphic;
+    private Font titleFont;
 
-    private String key;
+    public MenuView() {
+        titleFont = new Font("TimesRoman", Font.PLAIN, (int)(100 * screen.xScale()));
+    }
 
     @Override
-    public void paintComponent(Graphics g) {
-        //graphic = (Graphics2D) g;
+    public void paintComponent(Graphics gx) {
 
-        g.drawString("Counter is: " + counter, 200, 190);
+        ScaledGraphics g = new ScaledGraphics(gx);
+
+        g.getGraphics().setFont(titleFont);
+        g.drawString("Galaxy Intruders", 200, 150);
+
+        g.getGraphics().setFont(new Font("TimesRoman", Font.PLAIN, (int)(12 * screen.xScale())));
         g.drawString("Counter is: " + counter, 200, 190);
         g.drawString("Up: " + input.up(), 200, 200);
         g.drawString("Down " +input.down(), 200, 210);
