@@ -1,7 +1,7 @@
 package com.hamiko.galaxyintruder.statemachine;
 
 public enum State {
-    GAME,
+    GAME_PLAY,
     PAUSE,
     MENU
 }

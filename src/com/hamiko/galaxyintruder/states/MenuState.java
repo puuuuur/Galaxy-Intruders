@@ -17,8 +17,8 @@ public class MenuState extends GameState{
 
     @Override
     public void update() {
-        this.view.update();
-        ((MenuView)this.view).printInput((MenuInput) input);
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.hamiko.galaxyintruder.graphics;
 
+import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.window.Screen;
 
 import java.awt.*;
@@ -13,18 +14,17 @@ public class ScaledGraphics {
         this.graphics = (Graphics2D) graphics;
     }
 
-    public void drawString(String str, int x, int y) {
-        graphics.drawString(str, (int) (x * screen.xScale()), (int) (y * screen.yScale()));
-    }
-
     public Graphics2D getGraphics() {
         return graphics;
     }
 
-    //TODO delegate drawImage in two variants, absolute and relative
-    //TODO NOTE: Give draw image an entity instead
-    public void drawImage(){
-        //graphics.drawImage();
+    public void drawString(String str, int x, int y) {
+        graphics.drawString(str, (int) (x * screen.xScale()), (int) (y * screen.yScale()));
+    }
+
+    //TODO delegate drawEntity in two variants, absolute and relative
+    public void drawEntity(Entity entity){
+        graphics.drawImage(entity.getGraphics().getCurrentSprite().getImage(), entity.getX(), entity.getY(), 100, 100, screen);
     }
 
 }

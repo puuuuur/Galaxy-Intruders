@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 
 public class Screen extends JFrame implements Runnable {
 
-    private static Screen instance;
+    private static Screen instance = new Screen();
 
     public class Constant {
         public static final int BASE_WIDTH = 1920;
@@ -26,13 +26,7 @@ public class Screen extends JFrame implements Runnable {
     private ResolutionMap resolutions = new ResolutionMap();
 
     public static Screen getInstance() {
-
-        if (Screen.instance == null) {
-            Screen.instance = new Screen();
-        }
-
         return Screen.instance;
-
     }
 
     private Screen() {
@@ -42,12 +36,12 @@ public class Screen extends JFrame implements Runnable {
         //TODO if a set resolution exceeds the possible one, prevent OR scale down to monitor nativ
         //TODO support ultra wide screen mode?
 
-        this.createScreenSize(resolutions.getResolution(Resolution._720p));
+        this.createScreenSize(resolutions.getResolution(Resolution._1080p));
         setResizable(false);
         setFocusable(true);
         setLocationRelativeTo(null);
         setVisible(true);
-        setBackground(Color.yellow);
+        setBackground(Color.darkGray);
 
     }
 

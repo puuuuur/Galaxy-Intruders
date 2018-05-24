@@ -8,17 +8,11 @@ import com.hamiko.galaxyintruder.states.GameStateFactory;
  */
 public class GameStateMachine {
 
-    private static GameStateMachine instance = null;
+    private static GameStateMachine instance = new GameStateMachine();
     private GameState activeState = new GameStateFactory().create();
 
     public static GameStateMachine getInstance() {
-
-        if (GameStateMachine.instance == null) {
-            GameStateMachine.instance = new GameStateMachine();
-        }
-
         return GameStateMachine.instance;
-
     }
 
     public void update(){
