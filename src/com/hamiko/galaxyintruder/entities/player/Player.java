@@ -11,6 +11,12 @@ public class Player extends Entity {
     private SpaceShipInput input;
     private GraphicsManager spriteManager = new PlayerGraphics();
     private int speed = 3;
+    private double rightAccel = 1;
+    private double leftAccel = 1;
+
+    private int maxSpeed = 5;
+    private int firingSpeed = 45;//60 is one second
+    private int fireRouting = 0;
 
     public Player(){
         setX(Screen.getInstance().getWidth() / 2);
@@ -24,16 +30,58 @@ public class Player extends Entity {
         this.input = input;
     }
 
+    boolean left = false;
+    boolean right = false;
+
     public void update() {
 
-        if (input.left()) {
-            setX(getX() - speed);
-        } else if (input.right()) {
-            setX(getX() + speed);
+        //TODO input handling 2.0, if a direction is pressed, prevent other direction. FIFS (first in, first served)
+        //TODO reset rightAccel, or better, make velocity simulation
+
+        if(input.left() && input.right()){
+            setX(getX());
+            rightAccel = 0;
+            leftAccel = 0;
+        }else{
+
+            if(input.left()){
+                if(leftAccel < maxSpeed) leftAccel += 0.1d;
+            }else {
+                leftAccel = 0;
+            }
+
+            if(input.right()){
+                if(rightAccel < maxSpeed) rightAccel += 0.1d;
+            }else {
+                rightAccel = 0;
+            }
+
+            if (input.left()) {
+
+
+                if(getX() > 0)
+                setX(getX() - speed - (int) leftAccel);
+            } else if (input.right()) {
+                System.out.println(getGraphics().getCurrentSprite().getImage().getWidth() * 4);
+                if(getX() < Screen.Constant.BASE_WIDTH - getGraphics().getCurrentSprite().getImage().getWidth()* 4)
+                setX(getX() + speed + (int) rightAccel);
+            }
+
+
         }
 
         if (input.fire()) {
-            System.out.println("Shooting");
+            //TODO firing speed
+
+            if(firingSpeed == fireRouting){
+                System.out.println("Shoot");
+                fireRouting = 0;
+            }else{
+                fireRouting++;
+            }
+
+        }else {
+            fireRouting = 0;
         }
 
     }

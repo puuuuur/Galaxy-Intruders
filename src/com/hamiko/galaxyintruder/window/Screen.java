@@ -41,7 +41,7 @@ public class Screen extends JFrame implements Runnable {
         setFocusable(true);
         setLocationRelativeTo(null);
         setVisible(true);
-        setBackground(Color.darkGray);
+        setBackground(Color.black);
 
     }
 
