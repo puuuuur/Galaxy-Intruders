@@ -4,6 +4,7 @@ import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.window.Screen;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class ScaledGraphics {
 
@@ -24,7 +25,8 @@ public class ScaledGraphics {
 
     //TODO delegate drawEntity in two variants, absolute and relative
     public void drawEntity(Entity entity){
-        graphics.drawImage(entity.getGraphics().getCurrentSprite().getImage(), entity.getX(), entity.getY(), 100, 100, screen);
+        BufferedImage image = entity.getGraphics().getCurrentSprite().getImage();
+        graphics.drawImage(image, entity.getX(), entity.getY(), (int)(image.getWidth() * screen.xScale()), (int)(image.getHeight() * screen.yScale()), screen);
     }
 
 }

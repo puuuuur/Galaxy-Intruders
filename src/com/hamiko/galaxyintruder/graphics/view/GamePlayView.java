@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.graphics.view;
 
 import com.hamiko.galaxyintruder.entities.Entity;
+import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.graphics.ScaledGraphics;
 import com.hamiko.galaxyintruder.level.GameLevel;
 
@@ -10,19 +11,20 @@ public class GamePlayView extends GameView {
 
     private GameLevel level;
 
-    @Override
-    public void paintComponent(Graphics gx) {
+    public void render(Graphics g){
 
-        ScaledGraphics g = new ScaledGraphics(gx);
+        ScaledGraphics gx = new ScaledGraphics(g);
 
-        g.drawEntity(level.getPlayer());
+        gx.getGraphics().setColor(Color.white);
+        gx.getGraphics().drawString("Player coords(x: " + Player.global.getX() + " y: " + Player.global.getY() + ")", 20, 50);
+
+        gx.drawEntity(level.getPlayer());
 
         for (Entity e : level.getEnemyPool()) {
-            g.drawEntity(e);
+            gx.drawEntity(e);
         }
 
     }
-
     public void setLevel(GameLevel level) {
         this.level = level;
     }

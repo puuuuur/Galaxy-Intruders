@@ -7,8 +7,6 @@ public abstract class Entity {
     //TODO sound effect manager
     //TODO hitbox
     //TODO AI
-    protected GraphicsManager spriteManager;
-
     private int x;
     private int y;
 
@@ -28,9 +26,7 @@ public abstract class Entity {
         this.y = y;
     }
 
-    public GraphicsManager getGraphics() {
-        return spriteManager;
-    }
+    public abstract GraphicsManager getGraphics();
 
     public abstract void update();
 

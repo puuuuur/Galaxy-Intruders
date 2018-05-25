@@ -15,9 +15,10 @@ public class Main {
                 GameStateMachine.getInstance()
         );
 
+
         Thread gameThread = new Thread(game, "GAME_THREAD");
-        Thread screenThread = new Thread(screen, "SCREEN_THREAD");
         game.setGameThread(gameThread);
+        Thread screenThread = new Thread(screen, "SCREEN_THREAD");
 
         screenThread.start();
         gameThread.start();

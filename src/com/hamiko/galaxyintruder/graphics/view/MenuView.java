@@ -9,20 +9,19 @@ public class MenuView extends GameView {
     private Font titleFont;
 
     public MenuView() {
-        titleFont = new Font("TimesRoman", Font.PLAIN, (int)(100 * screen.xScale()));
+        titleFont = new Font("TimesRoman", Font.PLAIN, (int) (100 * screen.xScale()));
     }
 
     @Override
-    public void paintComponent(Graphics gx) {
+    public void render(Graphics g) {
 
-        ScaledGraphics g = new ScaledGraphics(gx);
+        ScaledGraphics gx = new ScaledGraphics(g);
 
-        g.getGraphics().setFont(titleFont);
-        g.getGraphics().setColor(Color.WHITE);
-        g.drawString("Galaxy Intruders", 200, 150);
+        gx.getGraphics().setFont(titleFont);
+        gx.getGraphics().setColor(Color.WHITE);
+        gx.drawString("Galaxy Intruders", 200, 150);
 
-        g.getGraphics().setFont(new Font("TimesRoman", Font.PLAIN, (int)(12 * screen.xScale())));
+        gx.getGraphics().setFont(new Font("TimesRoman", Font.PLAIN, (int) (12 * screen.xScale())));
 
     }
-
 }

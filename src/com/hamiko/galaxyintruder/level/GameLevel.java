@@ -9,7 +9,7 @@ public class GameLevel {
 
     //TODO consider seperating pool for enemies, effects, projectiles
     private ArrayList<Entity> enemyPool = new ArrayList<>();
-    private Player player = new Player();
+    private Player player;
 
 
     public void update() {

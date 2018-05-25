@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferStrategy;
 
 public class Screen extends JFrame implements Runnable {
 
@@ -52,13 +53,15 @@ public class Screen extends JFrame implements Runnable {
     }
 
     private void setScreenScale(Dimension screenSize) {
-        xScale = screenSize.width / (double)Constant.BASE_WIDTH;
-        yScale = screenSize.height / (double)Constant.BASE_HEIGHT;
+        xScale = screenSize.width / (double) Constant.BASE_WIDTH;
+        yScale = screenSize.height / (double) Constant.BASE_HEIGHT;
     }
 
+
+    private GameView view;
+
     public void setActiveView(GameView view) {
-        setContentPane(view);
-        pack();
+        this.view = view;
     }
 
     public void setOnCloseEvent(OnCloseEvent event) {
@@ -82,9 +85,28 @@ public class Screen extends JFrame implements Runnable {
     public void run() {
 
         isRunning = true;
-
         while (isRunning) {
-            this.repaint();
+
+            BufferStrategy bs = getBufferStrategy();
+
+            if (bs == null) {
+                createBufferStrategy(3);
+                continue;
+            }
+
+            Graphics g = bs.getDrawGraphics();
+            g.setColor(Color.black);
+            g.fillRect(0, 0, getWidth(), getHeight());
+
+
+            if (view != null) {
+                view.render(g);
+                //view.repaint();
+            }
+
+            g.dispose();
+            bs.show();
+
         }
 
     }

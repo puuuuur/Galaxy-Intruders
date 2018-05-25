@@ -10,12 +10,7 @@ import java.io.IOException;
 
 public class SpriteSheet {
 
-    private final int SCALE_32_BIT = 1;
-
-    protected BufferedImage testImage;
-
     protected Sprite[][] sprites;
-    protected Screen screen = Screen.getInstance();
 
     public SpriteSheet(String uri, int bit, int xTiles, int yTiles) {
 
@@ -34,12 +29,14 @@ public class SpriteSheet {
         int offsetX = 0;
         int offsetY = 0;
 
+        Screen screen = Screen.getInstance();
+
         for (int y = 0; y < yTiles; y++) {
 
             for (int x = 0; x < xTiles; x++) {
 
                 BufferedImage image = spriteSheet.getSubimage(offsetX, offsetY, bit, bit);
-                sprites[y][x] = new Sprite(image);
+                sprites[y][x] = new Sprite(ImageRefactor.resize(image, (int) (image.getWidth() * 4), (int) (image.getHeight() * 4)));
 
                 offsetX += bit;
 
@@ -58,9 +55,8 @@ public class SpriteSheet {
 
         Screen screen = Screen.getInstance();
 
-        int width = (int) (img.getWidth() * screen.xScale() * SCALE_32_BIT);
-        int height = (int) (img.getHeight() * screen.yScale() * SCALE_32_BIT);
-        //spriteSheet =  img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        int width = img.getWidth();
+        int height = img.getHeight();
 
         return ImageRefactor.resize(img, width, height);
 

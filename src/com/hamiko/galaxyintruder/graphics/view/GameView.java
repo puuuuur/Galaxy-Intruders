@@ -2,8 +2,12 @@ package com.hamiko.galaxyintruder.graphics.view;
 
 import com.hamiko.galaxyintruder.window.Screen;
 
-import javax.swing.*;
+import java.awt.*;
 
-public abstract class GameView extends JPanel {
+public abstract class GameView{
+
     static Screen screen = Screen.getInstance();
+
+    public abstract void render(Graphics g);
+
 }
