@@ -1,7 +1,6 @@
 package com.hamiko.galaxyintruder.graphics.sprite;
 
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
-import com.hamiko.galaxyintruder.window.Screen;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -29,14 +28,16 @@ public class SpriteSheet {
         int offsetX = 0;
         int offsetY = 0;
 
-        Screen screen = Screen.getInstance();
+        final int UPSCALE = 4;
 
         for (int y = 0; y < yTiles; y++) {
 
             for (int x = 0; x < xTiles; x++) {
 
                 BufferedImage image = spriteSheet.getSubimage(offsetX, offsetY, bit, bit);
-                sprites[y][x] = new Sprite(ImageRefactor.resize(image, (int) (image.getWidth() * 4), (int) (image.getHeight() * 4)));
+
+                image = ImageRefactor.resize(image, image.getWidth() * UPSCALE, image.getHeight() * UPSCALE);
+                sprites[y][x] = new Sprite(image);
 
                 offsetX += bit;
 
@@ -50,18 +51,8 @@ public class SpriteSheet {
     }
 
     private BufferedImage loadImage(String uri) throws IOException {
-
         BufferedImage img = ImageIO.read(new File(uri));
-
-        int width = img.getWidth();
-        int height = img.getHeight();
-
-        return ImageRefactor.resize(img, width, height);
-
-    }
-
-    public Sprite[][] getSprites() {
-        return sprites;
+        return ImageRefactor.resize(img, img.getWidth(), img.getHeight());
     }
 
     public Sprite getSprite(int y, int x) {

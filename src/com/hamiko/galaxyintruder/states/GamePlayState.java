@@ -1,7 +1,8 @@
 package com.hamiko.galaxyintruder.states;
 
+import com.hamiko.galaxyintruder.entities.enemies.BasicSmallShip;
+import com.hamiko.galaxyintruder.entities.player.MainGun;
 import com.hamiko.galaxyintruder.entities.player.Player;
-import com.hamiko.galaxyintruder.entities.projectiles.BasicBullet;
 import com.hamiko.galaxyintruder.graphics.view.GamePlayView;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.level.GameLevel;
@@ -9,7 +10,6 @@ import com.hamiko.galaxyintruder.statemachine.State;
 
 public class GamePlayState extends GameState {
 
-    private SpaceShipInput input;
     private GamePlayView view;
     private Player player;
     private GameLevel activeLevel;
@@ -17,17 +17,19 @@ public class GamePlayState extends GameState {
     public GamePlayState(GamePlayView view, SpaceShipInput input) {
         super(view, input);
 
-        player = new Player();
-        player.setInput(input);
-
         activeLevel = new GameLevel();
+        player = new Player(input, new MainGun(input, activeLevel));
+        BasicSmallShip ship = new BasicSmallShip();
+
+        activeLevel.getEnemyPool().add(ship);
+
         activeLevel.setPlayer(player);
 
         player.addLevel(activeLevel);
 
         this.view = view;
         this.view.setLevel(activeLevel);
-        this.input = input;
+
     }
 
     @Override

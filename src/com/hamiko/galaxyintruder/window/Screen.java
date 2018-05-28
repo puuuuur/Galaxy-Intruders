@@ -12,7 +12,6 @@ public class Screen extends JFrame implements Runnable {
 
     private static Screen instance = new Screen();
     private GameView activeView;
-    private JFrame frame;
 
     public class Constant {
         public static final int BASE_WIDTH = 1920;
@@ -100,7 +99,7 @@ public class Screen extends JFrame implements Runnable {
             g.setColor(Color.black);
             g.fillRect(0, 0, getWidth(), getHeight());
 
-                activeView.render(g);
+            activeView.render(g);
 
             g.dispose();
             bs.show();

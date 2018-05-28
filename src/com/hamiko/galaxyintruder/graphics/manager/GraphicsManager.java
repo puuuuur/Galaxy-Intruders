@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.graphics.handler;
+package com.hamiko.galaxyintruder.graphics.manager;
 
 import com.hamiko.galaxyintruder.graphics.animation.AnimationStudio;
 import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
@@ -21,7 +21,7 @@ public abstract class GraphicsManager {
     }
 
 
-    void setDefaultSprite(Sprite defaultSprite) {
+    protected void setDefaultSprite(Sprite defaultSprite) {
         this.defaultSprite = defaultSprite;
     }
 

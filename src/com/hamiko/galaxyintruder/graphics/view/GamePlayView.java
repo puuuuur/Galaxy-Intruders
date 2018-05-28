@@ -16,7 +16,7 @@ public class GamePlayView extends GameView {
         ScaledGraphics gx = new ScaledGraphics(g);
 
         gx.getGraphics().setColor(Color.white);
-        gx.getGraphics().drawString("Player coords(x: " + Player.global.getX() + " y: " + Player.global.getY() + ")", 20, 50);
+        gx.getGraphics().drawString("Player coords(x: " + Player.global.getX() + " y: " + Player.global.getY() + ")", 5, 12);
 
         gx.drawEntity(level.getPlayer());
 

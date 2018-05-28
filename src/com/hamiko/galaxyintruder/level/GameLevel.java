@@ -1,39 +1,29 @@
 package com.hamiko.galaxyintruder.level;
 
 import com.hamiko.galaxyintruder.entities.Entity;
+import com.hamiko.galaxyintruder.entities.EntityPool;
 import com.hamiko.galaxyintruder.entities.player.Player;
-
-import java.util.ArrayList;
 
 public class GameLevel {
 
-    //TODO consider seperating pool for enemies, effects, projectiles
-    private ArrayList<Entity> enemyPool = new ArrayList<>();
-
-    private ArrayList<Entity> projectilesPool = new ArrayList<>();
+    private EntityPool<Entity> enemyPool = new EntityPool<>();
+    private EntityPool<Entity> projectilesPool = new EntityPool<>();
 
     private Player player;
-
 
     public void update() {
 
         player.update();
-
-        for (Entity e : enemyPool) {
-            e.update();
-        }
-
-        for (Entity e : projectilesPool) {
-            e.update();
-        }
+        enemyPool.update();
+        projectilesPool.update();
 
     }
 
-    public ArrayList<Entity> getEnemyPool() {
+    public EntityPool<Entity> getEnemyPool() {
         return enemyPool;
     }
 
-    public ArrayList<Entity> getProjectilesPool() {
+    public EntityPool<Entity> getProjectilesPool() {
         return projectilesPool;
     }
 
@@ -45,7 +35,4 @@ public class GameLevel {
         this.player = player;
     }
 
-    public void addProjectile(Entity entity){
-        projectilesPool.add(entity);
-    }
 }

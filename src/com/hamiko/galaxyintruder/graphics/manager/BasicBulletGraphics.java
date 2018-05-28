@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.graphics.handler;
+package com.hamiko.galaxyintruder.graphics.manager;
 
 import com.hamiko.galaxyintruder.graphics.animation.AnimationStudio;
 import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheet;

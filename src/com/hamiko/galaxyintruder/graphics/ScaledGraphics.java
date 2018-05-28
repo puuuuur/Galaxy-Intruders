@@ -23,10 +23,9 @@ public class ScaledGraphics {
         graphics.drawString(str, (int) (x * screen.xScale()), (int) (y * screen.yScale()));
     }
 
-    //TODO delegate drawEntity in two variants, absolute and relative
     public void drawEntity(Entity entity) {
-        BufferedImage image = entity.getGraphics().getCurrentSprite().getImage();
 
+        BufferedImage image = entity.getGraphics().getCurrentSprite().getImage();
 
         graphics.drawImage(
                 image,

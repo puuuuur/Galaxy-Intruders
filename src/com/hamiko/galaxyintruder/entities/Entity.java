@@ -1,6 +1,6 @@
 package com.hamiko.galaxyintruder.entities;
 
-import com.hamiko.galaxyintruder.graphics.handler.GraphicsManager;
+import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 
 public abstract class Entity {
 
