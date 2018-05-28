@@ -24,6 +24,10 @@ public class GamePlayView extends GameView {
             gx.drawEntity(e);
         }
 
+        for (Entity e : level.getProjectilesPool()) {
+            gx.drawEntity(e);
+        }
+
     }
     public void setLevel(GameLevel level) {
         this.level = level;

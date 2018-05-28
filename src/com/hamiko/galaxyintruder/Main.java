@@ -8,19 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Screen screen = Screen.getInstance();
-
         Game game = new Game(
-                screen,
+                Screen.getInstance(),
                 GameStateMachine.getInstance()
         );
 
-
         Thread gameThread = new Thread(game, "GAME_THREAD");
         game.setGameThread(gameThread);
-        Thread screenThread = new Thread(screen, "SCREEN_THREAD");
-
-        screenThread.start();
         gameThread.start();
 
     }

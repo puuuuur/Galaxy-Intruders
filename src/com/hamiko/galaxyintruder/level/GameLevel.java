@@ -9,6 +9,9 @@ public class GameLevel {
 
     //TODO consider seperating pool for enemies, effects, projectiles
     private ArrayList<Entity> enemyPool = new ArrayList<>();
+
+    private ArrayList<Entity> projectilesPool = new ArrayList<>();
+
     private Player player;
 
 
@@ -20,10 +23,18 @@ public class GameLevel {
             e.update();
         }
 
+        for (Entity e : projectilesPool) {
+            e.update();
+        }
+
     }
 
     public ArrayList<Entity> getEnemyPool() {
         return enemyPool;
+    }
+
+    public ArrayList<Entity> getProjectilesPool() {
+        return projectilesPool;
     }
 
     public Player getPlayer() {
@@ -32,5 +43,9 @@ public class GameLevel {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void addProjectile(Entity entity){
+        projectilesPool.add(entity);
     }
 }

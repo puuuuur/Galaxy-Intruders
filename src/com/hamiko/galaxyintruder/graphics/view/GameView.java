@@ -4,7 +4,7 @@ import com.hamiko.galaxyintruder.window.Screen;
 
 import java.awt.*;
 
-public abstract class GameView{
+public abstract class GameView extends Canvas {
 
     static Screen screen = Screen.getInstance();
 

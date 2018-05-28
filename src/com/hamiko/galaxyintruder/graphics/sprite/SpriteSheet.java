@@ -53,8 +53,6 @@ public class SpriteSheet {
 
         BufferedImage img = ImageIO.read(new File(uri));
 
-        Screen screen = Screen.getInstance();
-
         int width = img.getWidth();
         int height = img.getHeight();
 

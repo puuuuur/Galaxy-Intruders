@@ -31,11 +31,12 @@ public class Game implements Runnable {
         int frames = 0;
         int updates = 0;
 
-        screen.requestFocus();
         screen.setOnCloseEvent(this::stopGame);
-        screen.setActiveView(gsm.getActiveState().getView());
+        screen.setGameView(gsm.getActiveState().getView());
+        gsm.getActiveState().getView().addKeyListener(gsm.getActiveState().getInput());
+        gsm.getActiveState().getView().requestFocus();
 
-        screen.addKeyListener(gsm.getActiveState().getInput());
+        new Thread(screen, "SCREEN_THREAD").start();
 
         while (isRunning) {
 
@@ -62,7 +63,6 @@ public class Game implements Runnable {
             }
 
         }
-
 
     }
 

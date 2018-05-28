@@ -11,6 +11,8 @@ import java.awt.image.BufferStrategy;
 public class Screen extends JFrame implements Runnable {
 
     private static Screen instance = new Screen();
+    private GameView activeView;
+    private JFrame frame;
 
     public class Constant {
         public static final int BASE_WIDTH = 1920;
@@ -57,11 +59,10 @@ public class Screen extends JFrame implements Runnable {
         yScale = screenSize.height / (double) Constant.BASE_HEIGHT;
     }
 
-
-    private GameView view;
-
-    public void setActiveView(GameView view) {
-        this.view = view;
+    public void setGameView(GameView view) {
+        add(view);
+        pack();
+        this.activeView = view;
     }
 
     public void setOnCloseEvent(OnCloseEvent event) {
@@ -85,12 +86,13 @@ public class Screen extends JFrame implements Runnable {
     public void run() {
 
         isRunning = true;
+
         while (isRunning) {
 
-            BufferStrategy bs = getBufferStrategy();
+            BufferStrategy bs = activeView.getBufferStrategy();
 
             if (bs == null) {
-                createBufferStrategy(3);
+                activeView.createBufferStrategy(3);
                 continue;
             }
 
@@ -98,11 +100,7 @@ public class Screen extends JFrame implements Runnable {
             g.setColor(Color.black);
             g.fillRect(0, 0, getWidth(), getHeight());
 
-
-            if (view != null) {
-                view.render(g);
-                //view.repaint();
-            }
+                activeView.render(g);
 
             g.dispose();
             bs.show();

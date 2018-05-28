@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.states;
 
 import com.hamiko.galaxyintruder.entities.player.Player;
+import com.hamiko.galaxyintruder.entities.projectiles.BasicBullet;
 import com.hamiko.galaxyintruder.graphics.view.GamePlayView;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.level.GameLevel;
@@ -21,6 +22,8 @@ public class GamePlayState extends GameState {
 
         activeLevel = new GameLevel();
         activeLevel.setPlayer(player);
+
+        player.addLevel(activeLevel);
 
         this.view = view;
         this.view.setLevel(activeLevel);

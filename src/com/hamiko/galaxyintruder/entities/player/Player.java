@@ -1,16 +1,18 @@
 package com.hamiko.galaxyintruder.entities.player;
 
 import com.hamiko.galaxyintruder.entities.Entity;
-import com.hamiko.galaxyintruder.graphics.handler.GraphicsManager;
+import com.hamiko.galaxyintruder.entities.projectiles.BasicBullet;
 import com.hamiko.galaxyintruder.graphics.handler.PlayerGraphics;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
+import com.hamiko.galaxyintruder.level.GameLevel;
 import com.hamiko.galaxyintruder.window.Screen;
 
 public class Player extends Entity {
 
-    public static Player global;
+    public static Player global;//Used to display player position for debugging purposes
+
     private SpaceShipInput input;
-    private GraphicsManager spriteManager = new PlayerGraphics();
+    private PlayerGraphics spriteManager = new PlayerGraphics();
 
     private int speed = 3;
     private double rightAccel = 1;
@@ -20,6 +22,7 @@ public class Player extends Entity {
     private int firingSpeed = 45;//60 is one second
     private int fireRouting = 0;
 
+    private GameLevel level;
 
     public Player() {
         global = this;
@@ -27,7 +30,8 @@ public class Player extends Entity {
         setY(Screen.getInstance().getHeight() - (int) (200 * Screen.getInstance().yScale()));//TODO make this cleaner
     }
 
-    public GraphicsManager getGraphics() {
+    @Override
+    public PlayerGraphics getGraphics() {
         return spriteManager;
     }
 
@@ -35,59 +39,88 @@ public class Player extends Entity {
         this.input = input;
     }
 
-    boolean left = false;
-    boolean right = false;
-
     public void update() {
+        handlePlayerMovement();
+        fireMainWeapon();
+    }
 
-        //TODO input handling 2.0, if a direction is pressed, prevent other direction. FIFS (first in, first served)
-        //TODO reset rightAccel, or better, make velocity simulation
+    public void addLevel(GameLevel level) {
+        this.level = level;
+    }
 
+    protected void handlePlayerMovement() {
+
+        //TODO create velocity simulation
         if (input.left() && input.right()) {
             setX(getX());
             rightAccel = 0;
             leftAccel = 0;
-        } else {
+            getGraphics().setCurrentSprite(getGraphics().getSpriteSheet().getShipDefault());
+        } else if ((input.left() || input.right())) {
 
             if (input.left()) {
-                if (leftAccel < maxSpeed) leftAccel += 0.1d;
+
+                if (leftAccel < maxSpeed) {
+                    leftAccel += 0.1d;
+                    getGraphics().setCurrentSprite(getGraphics().getSpriteSheet().getShipLeft());
+                }
+
             } else {
                 leftAccel = 0;
             }
 
             if (input.right()) {
-                if (rightAccel < maxSpeed) rightAccel += 0.1d;
+
+                if (rightAccel < maxSpeed) {
+                    rightAccel += 0.1d;
+                    getGraphics().setCurrentSprite(getGraphics().getSpriteSheet().getShipRight());
+
+                }
+
             } else {
                 rightAccel = 0;
             }
 
             if (input.left()) {
 
-                if (getX() > 0) {
+                if (getX() > getGraphics().getCurrentSprite().getImage().getWidth() / 2) {
                     setX(getX() - speed - (int) leftAccel);
                 } else {
-                    setX(0);
+                    setX(getGraphics().getCurrentSprite().getImage().getWidth() / 2);
                 }
 
             } else if (input.right()) {
 
-                if (getX() < Screen.getInstance().getWidth() - getGraphics().getCurrentSprite().getImage().getWidth()) {
+                if (getX() < Screen.getInstance().getWidth() - getGraphics().getCurrentSprite().getImage().getWidth() / 2) {
                     setX(getX() + speed + (int) rightAccel);
                 } else {
-                    setX(Screen.getInstance().getWidth());
+                    setX(Screen.getInstance().getWidth() - getGraphics().getCurrentSprite().getImage().getWidth() / 2);
                 }
 
             }
 
 
+        } else {
+            getGraphics().setCurrentSprite(getGraphics().getSpriteSheet().getShipDefault());
         }
 
+    }
+
+    private void fireMainWeapon() {
+
         if (input.fire()) {
-            //TODO firing speed
 
             if (firingSpeed == fireRouting) {
-                System.out.println("Shoot");
+
+                BasicBullet bullet = new BasicBullet(
+                        getX(),
+                        getY() - getGraphics().getCurrentSprite().getImage().getWidth() / 2
+
+                );
+
+                level.addProjectile(bullet);
                 fireRouting = 0;
+
             } else {
                 fireRouting++;
             }

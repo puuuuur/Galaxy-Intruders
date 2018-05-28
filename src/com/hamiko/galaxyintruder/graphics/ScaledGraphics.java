@@ -24,9 +24,55 @@ public class ScaledGraphics {
     }
 
     //TODO delegate drawEntity in two variants, absolute and relative
-    public void drawEntity(Entity entity){
+    public void drawEntity(Entity entity) {
         BufferedImage image = entity.getGraphics().getCurrentSprite().getImage();
-        graphics.drawImage(image, entity.getX(), entity.getY(), (int)(image.getWidth() * screen.xScale()), (int)(image.getHeight() * screen.yScale()), screen);
+
+
+        graphics.drawImage(
+                image,
+                entity.getX() - image.getWidth() / 2,
+                entity.getY() - image.getHeight() / 2,
+                (int) (image.getWidth() * screen.xScale()),
+                (int) (image.getHeight() * screen.yScale()),
+                screen
+        );
+
+        drawBorder(entity, image, Color.GREEN);
+        renderPivot(entity, image, Color.RED);
+
+    }
+
+    public void drawBorder(Entity entity, BufferedImage image, Color color) {
+
+        graphics.setColor(color);
+
+        graphics.drawRect(
+                entity.getX() - image.getWidth() / 2,
+                entity.getY() - image.getHeight() / 2,
+                image.getWidth(),
+                image.getHeight()
+        );
+
+    }
+
+    public void renderPivot(Entity entity, BufferedImage image, Color color) {
+
+        graphics.setColor(color);
+        
+        graphics.drawLine(
+                (int)(entity.getX() - 10 * screen.xScale()),
+                entity.getY(),
+                (int)(entity.getX() + 10 * screen.xScale()),
+                entity.getY()
+        );
+
+        graphics.drawLine(
+                entity.getX(),
+                (int)(entity.getY() - 10 * screen.yScale()),
+                entity.getX(),
+                (int)(entity.getY() + 10 * screen.yScale())
+        );
+
     }
 
 }
