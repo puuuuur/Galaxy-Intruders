@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.graphics;
 
 import com.hamiko.galaxyintruder.entities.Entity;
+import com.hamiko.galaxyintruder.hitbox.HitBox;
 import com.hamiko.galaxyintruder.window.Screen;
 
 import java.awt.*;
@@ -36,8 +37,9 @@ public class ScaledGraphics {
                 screen
         );
 
-        drawBorder(entity, image, Color.GREEN);
-        renderPivot(entity, image, Color.RED);
+        renderHitbox(entity, Color.yellow);
+       // drawBorder(entity, image, Color.GREEN);
+        renderPivot(entity, Color.RED);
 
     }
 
@@ -54,7 +56,7 @@ public class ScaledGraphics {
 
     }
 
-    public void renderPivot(Entity entity, BufferedImage image, Color color) {
+    public void renderPivot(Entity entity, Color color) {
 
         graphics.setColor(color);
         
@@ -71,6 +73,27 @@ public class ScaledGraphics {
                 entity.getX(),
                 (int)(entity.getY() + 10 * screen.yScale())
         );
+
+    }
+
+    public void renderHitbox(Entity entity, Color color){
+
+        graphics.setColor(color);
+
+        if(entity.getHitBoxManager() == null){
+            return;//TODO remove this after every entity has a hitbox manager
+        }
+
+        for (HitBox box: entity.getHitBoxManager().getHitBoxes() ) {
+
+            graphics.drawRect(
+                    box.getPosition().x - box.getWidth() / 2,
+                    box.getPosition().y - box.getWidth() / 2,
+                    box.getWidth(),
+                    box.getHeight()
+            );
+
+        }
 
     }
 
