@@ -5,8 +5,8 @@ import com.hamiko.galaxyintruder.window.Screen;
 
 public class ControlMechanic {
 
-    SpaceShipInput input;
-    Player player;
+    private SpaceShipInput input;
+    private Player player;
 
     private int speed = 3;
     private double rightAccel = 1;
@@ -20,7 +20,9 @@ public class ControlMechanic {
     }
 
     //TODO make this properly
-    void handlePlayerMovement(){
+    //ship animation and collision detection should not be handled here
+    //probable solution: give this method to animation, and return some kind of status (Enum ?)
+    void handlePlayerMovement() {
 
         if (input.left() && input.right()) {
             player.setX(player.getX());
@@ -54,26 +56,29 @@ public class ControlMechanic {
 
             if (input.left()) {
 
-                if (player.getX() > player.getGraphics().getCurrentSprite().getImage().getWidth() / 2) {
+                if (player.getX() > player.getWidth() / 2) {
                     player.setX(player.getX() - speed - (int) leftAccel);
                 } else {
-                    player.setX(player.getGraphics().getCurrentSprite().getImage().getWidth() / 2);
+                    player.setX(player.getWidth() / 2);
                 }
 
             } else if (input.right()) {
 
-                if (player.getX() < Screen.getInstance().getWidth() - player.getGraphics().getCurrentSprite().getImage().getWidth() / 2) {
+                // TODO hit collision should probably not be here
+                if (player.getX() < Screen.getInstance().getWidth() - player.getWidth() / 2) {
                     player.setX(player.getX() + speed + (int) rightAccel);
                 } else {
-                    player.setX(Screen.getInstance().getWidth() - player.getGraphics().getCurrentSprite().getImage().getWidth() / 2);
+                    player.setX(Screen.getInstance().getWidth() - player.getWidth() / 2);
                 }
 
             }
 
 
         } else {
-            player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipDefault());
+
+            player.getGraphics().setCurrentSprite(player.getGraphics().getDefaultSprite());
         }
 
     }
+
 }

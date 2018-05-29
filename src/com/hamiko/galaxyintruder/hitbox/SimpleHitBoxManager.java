@@ -2,8 +2,10 @@ package com.hamiko.galaxyintruder.hitbox;
 
 import com.hamiko.galaxyintruder.entities.Entity;
 
+/**
+ * Creates an hitbox around entity width and height
+ */
 public class SimpleHitBoxManager extends HitBoxManager{
-
 
     public SimpleHitBoxManager(Entity entity) {
 
@@ -12,4 +14,5 @@ public class SimpleHitBoxManager extends HitBoxManager{
         hitboxes.add(box);
 
     }
+
 }

@@ -17,7 +17,7 @@ public class BasicBullet extends Entity {
     private GameLevel level;
 
     public BasicBullet(int x, int y, GameLevel level) {
-        setCoords(x, y);
+        setLocation(x, y);
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
     }

@@ -34,10 +34,6 @@ public class Screen extends JFrame implements Runnable {
     private Screen() {
 
         //setUndecorated(true);
-        //TODO remove deco when full screen on
-        //TODO if a set resolution exceeds the possible one, prevent OR scale down to monitor nativ
-        //TODO support ultra wide screen mode?
-
         this.createScreenSize(resolutions.getResolution(Resolution._1080p));
         setResizable(false);
         setFocusable(true);
@@ -96,7 +92,7 @@ public class Screen extends JFrame implements Runnable {
             }
 
             Graphics g = bs.getDrawGraphics();
-            g.setColor(Color.black);
+            g.setColor(new Color(48, 54, 85));
             g.fillRect(0, 0, getWidth(), getHeight());
 
             activeView.render(g);

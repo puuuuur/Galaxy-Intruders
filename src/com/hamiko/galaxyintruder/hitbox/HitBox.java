@@ -5,8 +5,12 @@ import java.awt.*;
 public class HitBox {
 
     private Point position;
+
     private int width;
     private int height;
+
+    private int offsetX;
+    private int offsetY;
 
     public HitBox(int x, int y, int width, int height) {
         this(new Point(x, y), width, height);
@@ -49,4 +53,21 @@ public class HitBox {
         this.height = height;
         return this;
     }
+
+    public int getOffsetX() {
+        return offsetX;
+    }
+
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public int getOffsetY() {
+        return offsetY;
+    }
+
+    public void setOffsetY(int offsetY) {
+        this.offsetY = offsetY;
+    }
+
 }
