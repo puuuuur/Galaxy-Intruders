@@ -5,16 +5,12 @@ import com.hamiko.galaxyintruder.graphics.manager.PlayerGraphics;
 import com.hamiko.galaxyintruder.hitbox.PlayerHitBoxManager;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.level.GameLevel;
-import com.hamiko.galaxyintruder.window.Scalable;
 import com.hamiko.galaxyintruder.window.Screen;
 
-import java.awt.*;
-
-public class Player extends Entity implements Scalable {
+public class Player extends Entity {
 
     public static Player global;//Used to display player position for debugging purposes TODO remove after done
 
-    private SpaceShipInput input;
     private PlayerGraphics spriteManager = new PlayerGraphics();
     private ControlMechanic controls;
     private MainGun mainGun;
@@ -26,14 +22,18 @@ public class Player extends Entity implements Scalable {
 
         global = this;//TODO remove this after game is done
 
-        this.input = input;
         this.mainGun = gun;
         this.controls = new ControlMechanic(this, input);
-        setX(Screen.getInstance().getWidth() / 2);
-        setY(Screen.getInstance().getHeight() - (int) (200 * Screen.getInstance().yScale()));//TODO make this cleaner
+
+        final int startOffset = getHeight() / 2;
+
+        int xPos = Screen.getInstance().getWidth() / 2;
+        int yPos = Screen.getInstance().getHeight() - startOffset;
+
+        setX(xPos);
+        setY(yPos);//TODO make this cleaner
 
         this.hitbox = new PlayerHitBoxManager(this);
-
 
     }
 
@@ -47,27 +47,13 @@ public class Player extends Entity implements Scalable {
         return spriteManager;
     }
 
-    public void setInput(SpaceShipInput input) {
-        this.input = input;
-    }
-
     public void update() {
-        hitbox.update();
         controls.handlePlayerMovement();
         mainGun.fireMainWeapon(this);
     }
 
-    public Point getPosition() {
-        return new Point(getX(), getY());
-    }
-
     public void addLevel(GameLevel level) {
         this.level = level;
-    }
-
-    @Override
-    public void scale(double xScale, double yScale) {
-
     }
 
 }

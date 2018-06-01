@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.entities.player;
 
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
+import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.window.Screen;
 
 public class ControlMechanic {
@@ -8,9 +9,10 @@ public class ControlMechanic {
     private SpaceShipInput input;
     private Player player;
 
-    private int speed = 3;
+    private int speed = GameScale.xScale(3);
     private double rightAccel = 1;
     private double leftAccel = 1;
+    private double accelRactor = 0.001d;
 
     private int maxSpeed = 5;
 
@@ -34,7 +36,7 @@ public class ControlMechanic {
             if (input.left()) {
 
                 if (leftAccel < maxSpeed) {
-                    leftAccel += 0.1d;
+                    leftAccel += accelRactor;
                     player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipLeft());
                 }
 
@@ -45,7 +47,7 @@ public class ControlMechanic {
             if (input.right()) {
 
                 if (rightAccel < maxSpeed) {
-                    rightAccel += 0.1d;
+                    rightAccel += accelRactor;
                     player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipRight());
 
                 }

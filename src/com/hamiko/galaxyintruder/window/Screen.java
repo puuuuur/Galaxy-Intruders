@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.window;
 
 import com.hamiko.galaxyintruder.graphics.view.GameView;
+import com.hamiko.galaxyintruder.physics.GameScale;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,18 +9,21 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
-public class Screen extends JFrame implements Runnable {
+public class Screen extends JPanel implements Runnable {
+
+    private final String GAME_TITEL = "Galaxy Intruders";
 
     private static Screen instance = new Screen();
     private GameView activeView;
 
-    public class Constant {
-        public static final int BASE_WIDTH = 1920;
-        public static final int BASE_HEIGHT = 1080;
-    }
+    private Resolution currentResolution = Resolution._1080p;
 
-    private double xScale;
-    private double yScale;
+    JFrame frame = new JFrame();
+
+    public class Constant {
+        final static int BASE_WIDTH = 924;
+        final static int BASE_HEIGHT = 520;
+    }
 
     private boolean isRunning = false;
     private boolean isFullScreen = false;
@@ -34,35 +38,46 @@ public class Screen extends JFrame implements Runnable {
     private Screen() {
 
         //setUndecorated(true);
-        this.createScreenSize(resolutions.getResolution(Resolution._1080p));
-        setResizable(false);
-        setFocusable(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setBackground(Color.black);
+        this.createScreenSize(resolutions.getResolution(currentResolution));
+
+        // add(panel);
+        frame.add(this);
+        frame.setContentPane(this);
+        frame.setSize(resolutions.getResolution(currentResolution));
+        System.out.println(resolutions.getResolution(currentResolution));
+        frame.setResizable(false);
+        frame.setFocusable(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setBackground(Color.black);
 
     }
 
     public void createScreenSize(Dimension screenSize) {
         setPreferredSize(screenSize);
-        setScreenScale(screenSize);
-        pack();
+        setGameScale(screenSize);
+        frame.pack();
     }
 
-    private void setScreenScale(Dimension screenSize) {
-        xScale = screenSize.width / (double) Constant.BASE_WIDTH;
-        yScale = screenSize.height / (double) Constant.BASE_HEIGHT;
+    private void setGameScale(Dimension screenSize) {
+        GameScale.setScaling(
+                screenSize.width / (double) Constant.BASE_WIDTH,
+                screenSize.height / (double) Constant.BASE_HEIGHT
+        );
     }
+
+    JPanel panel = new JPanel();
 
     public void setGameView(GameView view) {
+
         add(view);
-        pack();
+        view.setSize(getSize());
         this.activeView = view;
     }
 
     public void setOnCloseEvent(OnCloseEvent event) {
 
-        addWindowListener(new WindowAdapter() {
+        frame.addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent e) {
 
@@ -83,33 +98,35 @@ public class Screen extends JFrame implements Runnable {
         isRunning = true;
 
         while (isRunning) {
-
-            BufferStrategy bs = activeView.getBufferStrategy();
-
-            if (bs == null) {
-                activeView.createBufferStrategy(3);
-                continue;
-            }
-
-            Graphics g = bs.getDrawGraphics();
-            g.setColor(new Color(48, 54, 85));
-            g.fillRect(0, 0, getWidth(), getHeight());
-
-            activeView.render(g);
-
-            g.dispose();
-            bs.show();
-
+            render();
         }
 
     }
 
-    public double xScale() {
-        return xScale;
+    public void render() {
+
+        BufferStrategy bs = activeView.getBufferStrategy();
+
+        if (bs == null) {
+            activeView.createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = bs.getDrawGraphics();
+        g.setColor(new Color(48, 54, 85));
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        activeView.render(g);
+
+        panel.paintComponents(activeView.getGraphics());
+
+        g.dispose();
+        bs.show();
+
     }
 
-    public double yScale() {
-        return yScale;
+    public void updateUPS(int ups) {
+        this.frame.setTitle(GAME_TITEL + " UPS: " + ups);
     }
 
 }

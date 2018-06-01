@@ -11,34 +11,12 @@ public abstract class HitBoxManager {
 
     protected Entity entity;
 
+    public HitBoxManager(Entity entity) {
+        this.entity = entity;
+    }
+
     public List<HitBox> getHitBoxes() {
         return hitboxes;
-    }
-
-    public void update() {
-
-        for (HitBox box : hitboxes) {
-
-            box.getPosition().translate(
-                    getEntity().getX() - box.getPosition().x + box.getOffsetX(),
-                    getEntity().getY() - box.getPosition().y + box.getOffsetY()
-            );
-
-            /*
-             *NOTES on making this work
-             * 1. keep as is, with offset set, is kinda hardcoded but works well enough
-             * 2. create an interface for the hit box position
-             *   a. the interface should have two methods that return an integer
-             *   b. the method parameter should be the entity from witch we will calculate our new position
-             *   b. in the methods we define how to calculate the exact position we want
-             */
-
-        }
-
-    }
-
-    public Entity getEntity() {
-        return entity;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.hamiko.galaxyintruder.graphics.sprite;
 
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.physics.ScaledDimension;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,29 +12,34 @@ public class Sprite  {
 
     private BufferedImage image;
 
+    private ScaledDimension dimension;
+
     public Sprite(String uri){
 
         try {
+
             BufferedImage img = ImageIO.read(new File(uri));
 
-            Screen screen = Screen.getInstance();
-            final int SCALE_32_BIT = 4;
-            int width = (int)(img.getWidth()  * screen.xScale() * SCALE_32_BIT);
-            int height = (int)(img.getHeight()  * screen.yScale() * SCALE_32_BIT);
-            image = ImageRefactor.resize(img, width, height);
+            this.image = ImageRefactor.createCompatibleImage(img);
+            this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
 
         } catch (IOException ex) {
-            // handle exception...
+            // TODO handle exception...
         }
 
     }
 
-    public Sprite(BufferedImage image){
+    Sprite(BufferedImage image){
        this.image = image;
+       this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
     }
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public ScaledDimension getDimension() {
+        return dimension;
     }
 
 }

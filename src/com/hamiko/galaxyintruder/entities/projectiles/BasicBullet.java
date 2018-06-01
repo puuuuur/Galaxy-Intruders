@@ -6,12 +6,13 @@ import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
 import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.physics.GameScale;
 
 public class BasicBullet extends Entity {
 
     private BasicBulletGraphics spriteManager = new BasicBulletGraphics();
     private SimpleHitBoxManager hitBoxManager;
-    private int lifeTime = 50;
+    private int speed = GameScale.yScale(3);
     private int power = 10;
 
     private GameLevel level;
@@ -30,14 +31,13 @@ public class BasicBullet extends Entity {
     @Override
     public void update() {
 
-        hitBoxManager.update();
-        if (getY() <= lifeTime) {
+        if (getY() <= 0) {
 
             level.getProjectilesPool().kill(this);
             return;
         }
 
-        setY(getY() - 9);
+        setY(getY() - speed);
 
     }
 

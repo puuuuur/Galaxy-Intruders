@@ -23,36 +23,39 @@ public class SpriteSheet {
 
     }
 
-    private void createSpritesFromSpriteSheet(BufferedImage spriteSheet, int bit, int xTiles, int yTiles) {
+    private void createSpritesFromSpriteSheet(BufferedImage spriteSheet, int size, int xTiles, int yTiles) {
+        createSpritesFromSpriteSheet(spriteSheet, size, size, xTiles, yTiles);
+    }
+
+    private void createSpritesFromSpriteSheet(BufferedImage spriteSheet, int width, int height, int xTiles, int yTiles) {
 
         int offsetX = 0;
         int offsetY = 0;
-
-        final int UPSCALE = 4;
 
         for (int y = 0; y < yTiles; y++) {
 
             for (int x = 0; x < xTiles; x++) {
 
-                BufferedImage image = spriteSheet.getSubimage(offsetX, offsetY, bit, bit);
-
-                image = ImageRefactor.resize(image, image.getWidth() * UPSCALE, image.getHeight() * UPSCALE);
+                BufferedImage image = spriteSheet.getSubimage(offsetX, offsetY, width, height);
+                image = ImageRefactor.createCompatibleImage(image);
                 sprites[y][x] = new Sprite(image);
 
-                offsetX += bit;
+                offsetX += width;
 
             }
 
             offsetX = 0;
-            offsetY += bit;
+            offsetY += height;
 
         }
 
     }
 
     private BufferedImage loadImage(String uri) throws IOException {
+
         BufferedImage img = ImageIO.read(new File(uri));
-        return ImageRefactor.resize(img, img.getWidth(), img.getHeight());
+        return ImageRefactor.createCompatibleImage(img);
+
     }
 
     public Sprite getSprite(int y, int x) {

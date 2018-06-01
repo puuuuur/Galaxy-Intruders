@@ -2,10 +2,10 @@ package com.hamiko.galaxyintruder.graphics;
 
 import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
+import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.window.Screen;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class ScaledGraphics {
 
@@ -21,62 +21,61 @@ public class ScaledGraphics {
     }
 
     public void drawString(String str, int x, int y) {
-        graphics.drawString(str, (int) (x * screen.xScale()), (int) (y * screen.yScale()));
+        graphics.drawString(str, (int) (x * GameScale.xScale()), (int) (y * GameScale.yScale()));
     }
 
     public void drawEntity(Entity entity) {
 
-        BufferedImage image = entity.getGraphics().getCurrentSprite().getImage();
-
         graphics.drawImage(
-                image,
-                entity.getX() - image.getWidth() / 2,
-                entity.getY() - image.getHeight() / 2,
-                (int) (image.getWidth() * screen.xScale()),
-                (int) (image.getHeight() * screen.yScale()),
+                entity.getGraphics().getCurrentSprite().getImage(),
+                entity.getX() - entity.getWidth() / 2,
+                entity.getY() - entity.getHeight() / 2,
+                entity.getWidth(),
+                entity.getHeight(),
                 screen
         );
 
-        renderHitbox(entity, Color.yellow);
-       // drawBorder(entity, image, Color.GREEN);
+        renderHitBox(entity, Color.yellow);
+        //drawBorder(entity, Color.GREEN);
         renderPivot(entity, Color.RED);
 
     }
 
-    public void drawBorder(Entity entity, BufferedImage image, Color color) {
+    public void drawBorder(Entity entity, Color color) {
 
         graphics.setColor(color);
 
         graphics.drawRect(
-                entity.getX() - image.getWidth() / 2,
-                entity.getY() - image.getHeight() / 2,
-                image.getWidth(),
-                image.getHeight()
+                entity.getX() - entity.getWidth() / 2,
+                entity.getY() - entity.getHeight() / 2,
+                entity.getWidth(),
+                entity.getHeight()
         );
 
     }
 
-    public void renderPivot(Entity entity, Color color) {
+    private void renderPivot(Entity entity, Color color) {
 
+        final int pivotLength = 4;
         graphics.setColor(color);
         
         graphics.drawLine(
-                (int)(entity.getX() - 10 * screen.xScale()),
+                (int)(entity.getX() - pivotLength * GameScale.xScale()),
                 entity.getY(),
-                (int)(entity.getX() + 10 * screen.xScale()),
+                (int)(entity.getX() + pivotLength * GameScale.xScale()),
                 entity.getY()
         );
 
         graphics.drawLine(
                 entity.getX(),
-                (int)(entity.getY() - 10 * screen.yScale()),
+                (int)(entity.getY() - pivotLength * GameScale.yScale()),
                 entity.getX(),
-                (int)(entity.getY() + 10 * screen.yScale())
+                (int)(entity.getY() + pivotLength * GameScale.yScale())
         );
 
     }
 
-    public void renderHitbox(Entity entity, Color color){
+    private void renderHitBox(Entity entity, Color color){
 
         graphics.setColor(color);
 
@@ -87,8 +86,8 @@ public class ScaledGraphics {
         for (HitBox box: entity.getHitBoxManager().getHitBoxes() ) {
 
             graphics.drawRect(
-                    box.getPosition().x - box.getWidth() / 2,
-                    box.getPosition().y - box.getWidth() / 2,
+                    box.getX() - box.getWidth() / 2,
+                    box.getY() - box.getWidth() / 2,
                     box.getWidth(),
                     box.getHeight()
             );

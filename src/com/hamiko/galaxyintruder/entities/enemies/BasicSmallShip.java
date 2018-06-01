@@ -5,15 +5,15 @@ import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.graphics.manager.enemies.BasicSmallShipGraphics;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
-
-import java.awt.*;
+import com.hamiko.galaxyintruder.physics.Position;
+import com.hamiko.galaxyintruder.window.Screen;
 
 public class BasicSmallShip extends Entity {
 
     private GraphicsManager graphicsManager = new BasicSmallShipGraphics();
     private SimpleHitBoxManager hitBoxManager;
 
-    public BasicSmallShip(Point position) {
+    public BasicSmallShip(Position position) {
         getPosition().setLocation(position);
         hitBoxManager = new SimpleHitBoxManager(this);
     }
@@ -26,8 +26,8 @@ public class BasicSmallShip extends Entity {
     }
 
     public BasicSmallShip() {
-        setX(500);
-        setY(50);
+        setX(Screen.getInstance().getWidth() / 2);
+        setY(getHeight() / 2);
 
         hitBoxManager = new SimpleHitBoxManager(this);
     }

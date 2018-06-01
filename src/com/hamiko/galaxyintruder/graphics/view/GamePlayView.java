@@ -11,7 +11,7 @@ public class GamePlayView extends GameView {
 
     private GameLevel level;
 
-    public void render(Graphics g){
+    public void render(Graphics g) {
 
         ScaledGraphics gx = new ScaledGraphics(g);
 
@@ -29,6 +29,7 @@ public class GamePlayView extends GameView {
         }
 
     }
+
     public void setLevel(GameLevel level) {
         this.level = level;
     }

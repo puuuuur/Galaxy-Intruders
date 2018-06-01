@@ -1,36 +1,26 @@
 package com.hamiko.galaxyintruder.hitbox;
 
 import com.hamiko.galaxyintruder.entities.player.Player;
-
-import java.awt.*;
+import com.hamiko.galaxyintruder.physics.GameScale;
+import com.hamiko.galaxyintruder.physics.Position;
 
 public class PlayerHitBoxManager extends HitBoxManager {
 
 
-    private Player player;
-
     public PlayerHitBoxManager(Player player) {
+        super(player);
 
-        this.player = player;
+        Position playerPosition = player.getPosition();
 
-        Point playerPosition = player.getPosition();
-        int yTranslate = playerPosition.y - player.getHeight() / 4 - 10;
-        HitBox box = new HitBox(playerPosition.x, yTranslate, 40, player.getHeight() / 2);
+        HitBox cockpit = new HitBox(playerPosition, player.getHeight() / 4, player.getHeight() / 2);
+        cockpit.setOffsetY(- player.getHeight() / 2 + GameScale.xScale(4));
 
-        box.setOffsetY(-44);
-        hitboxes.add(box);
+        hitboxes.add(cockpit);
 
-        yTranslate = playerPosition.y + player.getHeight() / 4 + 30;
+        HitBox shipTorso = new HitBox(playerPosition, player.getWidth(), player.getHeight() / 2);
+        shipTorso.setOffsetY(player.getHeight() / 2);
+        hitboxes.add(shipTorso);
 
-        box = new HitBox(playerPosition.x, yTranslate, player.getWidth(), player.getHeight() / 2);
-        box.setOffsetY(65);
-        hitboxes.add(box);
-
-    }
-
-    @Override
-    public Player getEntity() {
-        return player;
     }
 
 }

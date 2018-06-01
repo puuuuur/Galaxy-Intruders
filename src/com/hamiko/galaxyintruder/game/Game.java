@@ -6,7 +6,6 @@ import com.hamiko.galaxyintruder.window.Screen;
 public class Game implements Runnable {
 
     private boolean isRunning = false;
-    private String gameTitle = "Galaxy Intruders";
 
     private GameStateMachine gsm;
 
@@ -28,7 +27,6 @@ public class Game implements Runnable {
 
         final double ns = 1000000000.0 / 60.0;
         double delta = 0;
-        int frames = 0;
         int updates = 0;
 
         screen.setOnCloseEvent(this::stopGame);
@@ -36,7 +34,7 @@ public class Game implements Runnable {
         gsm.getActiveState().getView().addKeyListener(gsm.getActiveState().getInput());
         gsm.getActiveState().getView().requestFocus();
 
-        new Thread(screen, "SCREEN_THREAD").start();
+        //new Thread(screen, "SCREEN_THREAD").start();
 
         while (isRunning) {
 
@@ -47,18 +45,17 @@ public class Game implements Runnable {
             while (delta >= 1) {
 
                 update();
+                screen.render();
                 delta--;
                 updates++;
-                frames++;
 
             }
 
             if (System.currentTimeMillis() - timer > 1000) {
 
-                screen.setTitle(gameTitle + "  |   " + updates + " ups, " + frames + " fps");
+                screen.updateUPS(updates);
                 timer += 1000;
                 updates = 0;
-                frames = 0;
 
             }
 
@@ -70,12 +67,9 @@ public class Game implements Runnable {
         gsm.update();
     }
 
-    public void setIsRunning(boolean isRunning) {
-        this.isRunning = isRunning;
-    }
-
+    //TODO Not needed if not using a second thread
     private void stopGame() {
-        setIsRunning(false);
+        this.isRunning = false;
         this.gameThread.interrupt();
     }
 

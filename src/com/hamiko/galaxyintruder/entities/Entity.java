@@ -2,15 +2,14 @@ package com.hamiko.galaxyintruder.entities;
 
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
-
-import java.awt.*;
+import com.hamiko.galaxyintruder.physics.Position;
 
 public abstract class Entity {
 
     //TODO sound effect manager
     //TODO AI
 
-    private Point position = new Point();
+    private Position position = new Position();
 
     public int getX() {
         return position.x;
@@ -33,20 +32,20 @@ public abstract class Entity {
     }
 
     public int getWidth() {
-        return getGraphics().getCurrentSprite().getImage().getWidth();
+        return (int)getGraphics().getCurrentSprite().getDimension().getWidth();
     }
 
     public int getHeight() {
-        return getGraphics().getCurrentSprite().getImage().getHeight();
+        return (int)getGraphics().getCurrentSprite().getDimension().getHeight();
     }
 
-
-    public Point getPosition() {
+    public Position getPosition() {
         return this.position;
     }
 
     public abstract GraphicsManager getGraphics();
     public abstract HitBoxManager getHitBoxManager();
+
     public abstract void update();
 
 }
