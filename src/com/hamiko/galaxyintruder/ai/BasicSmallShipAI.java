@@ -12,16 +12,17 @@ public class BasicSmallShipAI implements Behavior {
     @Override
     public void act(SpaceShip s) {
 
+        setFireTime();
+
         if (fireCounter++ >= fireTime) {
 
             BasicSmallShip ship = (BasicSmallShip) s;
             ship.getGun().shootWeapon(ship);
 
             fireCounter = 0;
+            isFireTimeSet = false;
 
         }
-
-        setFireTime();
 
     }
 
@@ -29,8 +30,7 @@ public class BasicSmallShipAI implements Behavior {
 
         if (isFireTimeSet) return;
         isFireTimeSet = true;
-
-        fireTime = (int) (Math.random() * 3) + 4;
+        fireTime = (int) (Math.random() * 5 + 3) * 60;
 
     }
 

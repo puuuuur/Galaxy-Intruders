@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.game;
 
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class Game implements Runnable {
 
@@ -30,7 +30,7 @@ public class Game implements Runnable {
         double delta = 0;
         int updates = 0;
 
-        gsm.setActiveState(State.GAME_PLAY);
+        gsm.setActiveState(State.MENU);
         screen.setOnCloseEvent(this::stopGame);
 
         //new Thread(screen, "SCREEN_THREAD").start();

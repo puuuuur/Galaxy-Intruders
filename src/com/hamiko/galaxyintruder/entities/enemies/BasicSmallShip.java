@@ -2,7 +2,6 @@ package com.hamiko.galaxyintruder.entities.enemies;
 
 import com.hamiko.galaxyintruder.ai.BasicSmallShipAI;
 import com.hamiko.galaxyintruder.ai.Behavior;
-import com.hamiko.galaxyintruder.game.Game;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.graphics.manager.enemies.BasicSmallShipGraphics;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
@@ -10,7 +9,7 @@ import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
 import com.hamiko.galaxyintruder.level.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.physics.Position;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class BasicSmallShip extends Enemy {
 

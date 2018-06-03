@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.states;
+package com.hamiko.galaxyintruder.statemachine.states;
 
 import com.hamiko.galaxyintruder.graphics.view.MenuView;
 import com.hamiko.galaxyintruder.input.MenuInput;
@@ -19,9 +19,13 @@ public class MenuState extends GameState {
     @Override
     public void update() {
 
-        MenuInput cont = (MenuInput) this.input;
-        if(cont.cancel()){
+        MenuInput controls = (MenuInput) this.input;
+        if(controls.cancel()){
             GameStateMachine.getInstance().setActiveState(State.GAME_PLAY);
+        }else if(controls.up()){
+
+        }else if(controls.down()){
+
         }
 
     }

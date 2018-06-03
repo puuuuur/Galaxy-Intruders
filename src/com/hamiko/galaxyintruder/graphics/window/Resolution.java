@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.window;
+package com.hamiko.galaxyintruder.graphics.window;
 
 public enum Resolution {
     _270p,

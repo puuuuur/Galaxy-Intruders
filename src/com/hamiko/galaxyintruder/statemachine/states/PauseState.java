@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.states;
+package com.hamiko.galaxyintruder.statemachine.states;
 
 import com.hamiko.galaxyintruder.graphics.view.PauseView;
 import com.hamiko.galaxyintruder.input.PauseInput;

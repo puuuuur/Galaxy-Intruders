@@ -6,7 +6,7 @@ import com.hamiko.galaxyintruder.hitbox.PlayerHitBoxManager;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.level.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class Player extends SpaceShip {
 

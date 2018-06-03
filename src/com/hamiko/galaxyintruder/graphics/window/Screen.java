@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.window;
+package com.hamiko.galaxyintruder.graphics.window;
 
 import com.hamiko.galaxyintruder.graphics.view.GameView;
 import com.hamiko.galaxyintruder.physics.GameScale;
@@ -12,12 +12,10 @@ import java.awt.image.BufferStrategy;
 public class Screen extends JFrame implements Runnable {
 
     private final String GAME_TITEL = "Galaxy Intruders";
-
     private static Screen instance = new Screen();
-
     private GameView activeView;
-
     private Resolution currentResolution = Resolution._720p;
+    private final Color BACKGROUND_COLOR = new Color(48, 54, 85);
 
     public class Constant {
         final static int BASE_WIDTH = 924;
@@ -38,7 +36,7 @@ public class Screen extends JFrame implements Runnable {
 
     private Screen() {
 
-//        setUndecorated(true);
+        //setUndecorated(true);
         setResizable(false);
         setFocusable(true);
 
@@ -58,19 +56,6 @@ public class Screen extends JFrame implements Runnable {
         setLocationRelativeTo(null);
         setVisible(true);
 
-    }
-
-    public void createScreenSize(Dimension screenSize) {
-        //  setPreferredSize(screenSize);
-        setGameScale(screenSize);
-        pack();
-    }
-
-    private void setGameScale(Dimension screenSize) {
-        GameScale.setScaling(
-                screenSize.width / (double) Constant.BASE_WIDTH,
-                screenSize.height / (double) Constant.BASE_HEIGHT
-        );
     }
 
     public void setGameView(GameView view) {
@@ -115,7 +100,7 @@ public class Screen extends JFrame implements Runnable {
         }
 
         Graphics g = bs.getDrawGraphics();
-        g.setColor(new Color(48, 54, 85));
+        g.setColor(BACKGROUND_COLOR);
         g.fillRect(0, 0, getWidth(), getHeight());
 
         activeView.render(g);

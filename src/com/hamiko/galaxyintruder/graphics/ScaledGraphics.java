@@ -4,10 +4,8 @@ import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
-import com.hamiko.galaxyintruder.input.InputHandler;
-import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.physics.GameScale;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 import java.awt.*;
 
@@ -50,9 +48,7 @@ public class ScaledGraphics {
 
         renderHitBox(entity, Color.yellow);
         renderPivot(entity, Color.RED);
-
         //drawBorder(entity, Color.GREEN);
-
 
     }
 
@@ -94,10 +90,6 @@ public class ScaledGraphics {
 
         graphics.setColor(color);
 
-        if (entity.getHitBoxManager() == null) {
-            return;//TODO remove this after every entity has a hitbox manager
-        }
-
         for (HitBox box : entity.getHitBoxManager().getHitBoxes()) {
 
             graphics.drawRect(
@@ -134,17 +126,6 @@ public class ScaledGraphics {
             );
 
         }
-
-
-    }
-
-    private void drawInputDebugger(Graphics g, InputHandler i) {
-
-        SpaceShipInput input = (SpaceShipInput)i;
-        g.drawString("Up: " + input.up(), 200, 200);
-        g.drawString("Down " +input.down(), 200, 210);
-        g.drawString("Confirm: " + input.pause(), 200, 220);
-        g.drawString("Left: " + input.left(), 200, 230);
 
     }
 

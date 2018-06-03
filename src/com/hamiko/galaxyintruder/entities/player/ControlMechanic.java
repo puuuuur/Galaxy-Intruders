@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.entities.player;
 
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.physics.GameScale;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class ControlMechanic {
 

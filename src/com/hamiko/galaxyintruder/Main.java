@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder;
 
 import com.hamiko.galaxyintruder.game.Game;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
-import com.hamiko.galaxyintruder.window.Screen;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class Main {
 
