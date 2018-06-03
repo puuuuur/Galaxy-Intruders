@@ -29,10 +29,21 @@ public class GameScale {
         return yScale;
     }
 
+    /**
+     * Returns value scaled by x scale
+     * @param val Value to scale
+     * @return Scalded value
+     */
     public static int xScale(int val) {
         return (int)(xScale * val);
     }
 
+    /**
+     * Returns value scaled by y scale
+     *
+     * @param val Value to scale
+     * @return Scalded value
+     */
     public static int yScale(int val) {
         return (int)(yScale * val);
     }

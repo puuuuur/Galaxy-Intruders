@@ -1,6 +1,6 @@
 package com.hamiko.galaxyintruder.entities.projectiles;
 
-import com.hamiko.galaxyintruder.entities.enemies.Enemy;
+import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.graphics.manager.BasicBulletGraphics;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
@@ -8,8 +8,9 @@ import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
 import com.hamiko.galaxyintruder.level.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
+import com.hamiko.galaxyintruder.window.Screen;
 
-public class BasicBullet extends Projectile {
+public class EnemyBullet extends Projectile {
 
     private BasicBulletGraphics spriteManager = new BasicBulletGraphics();
     private SimpleHitBoxManager hitBoxManager;
@@ -17,12 +18,13 @@ public class BasicBullet extends Projectile {
     private int power = 10;
 
 
-    public BasicBullet(int x, int y, GameLevel level) {
+    public EnemyBullet(int x, int y, GameLevel level) {
         super(level);
         setLocation(x, y);
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
         level.getProjectilesPool().add(this);
+
     }
 
     @Override
@@ -31,35 +33,28 @@ public class BasicBullet extends Projectile {
 
         boolean isKilled = false;
 
-        for (Enemy enemy : level.getEnemyPool()) {
+        Player player = level.getPlayer();
 
-            for (HitBox box : enemy.getHitBoxManager().getHitBoxes()) {
 
-                //TODO make some logic that makes  sense. maybe determine borders or some kind of surface
-                //Definitely need a system that can determine the type of hit box, and the potential hit area
-                //Its probably a good idea to calculate this thinks before head
-                //IDEA 1: getState a detection interface that every hit box implements
-                //        a) In this interface we determine the border surface
-                if (box.getY() + box.getHeight() / 2 >= getY() - getHeight() / 2) {
+        for (HitBox box : player.getHitBoxManager().getHitBoxes()) {
 
-                    if (
-                            box.getX() + box.getWidth() / 2 >= hitSurfaceXLeft()
-                                    && box.getX() - box.getWidth() / 2 <= hitSurfaceXRight()
-                            ) {
-                        isKilled = true;
-                        enemy.takeDamage(power);
-                    }
+            if (box.getY() - box.getHeight() / 2 <= getY() + getHeight() / 2) {
 
+                if (
+                        box.getX() + box.getWidth() / 2 >= hitSurfaceXLeft()
+                                && box.getX() - box.getWidth() / 2 <= hitSurfaceXRight()
+                        ) {
+                    isKilled = true;
+                    player.takeDamage(power);
                 }
 
             }
 
         }
 
-        if (getY() <= 0) {
 
+        if (getY() >= Screen.getInstance().getHeight()) {
             isKilled = true;
-
         }
 
         if (isKilled) {
@@ -67,7 +62,7 @@ public class BasicBullet extends Projectile {
             return;
         }
 
-        setY(getY() - speed);
+        setY(getY() + speed);
 
     }
 
@@ -91,7 +86,7 @@ public class BasicBullet extends Projectile {
 
     @Override
     public Owner owner() {
-        return Owner.PLAYER;
+        return Owner.ENEMY;
     }
 
 }

@@ -13,7 +13,7 @@ public abstract class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        if(keyMap.containsKey(e.getKeyCode())){
+        if (keyMap.containsKey(e.getKeyCode())) {
             keyMap.replace(e.getKeyCode(), true);
         }
 
@@ -22,14 +22,14 @@ public abstract class InputHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
-        if(keyMap.containsKey(e.getKeyCode()) && keyMap.get(e.getKeyCode())){
+        if (keyMap.containsKey(e.getKeyCode()) && keyMap.get(e.getKeyCode())) {
             keyMap.replace(e.getKeyCode(), false);
         }
 
     }
 
     //Returns only pressed keys
-    public Map<Integer, Boolean> getPressedKeys(){
+    public Map<Integer, Boolean> getPressedKeys() {
 
         return keyMap.entrySet()
                 .stream()
@@ -38,11 +38,17 @@ public abstract class InputHandler implements KeyListener {
 
     }
 
-    public Map<Integer, Boolean> getKeyMap(){
+    public Map<Integer, Boolean> getKeyMap() {
         return keyMap;
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
+
+
+    public void resetInput() {
+        keyMap.entrySet().forEach(x -> x.setValue(false));
+    }
 
 }

@@ -1,33 +1,49 @@
 package com.hamiko.galaxyintruder.entities.enemies;
 
-import com.hamiko.galaxyintruder.entities.Entity;
+import com.hamiko.galaxyintruder.ai.BasicSmallShipAI;
+import com.hamiko.galaxyintruder.ai.Behavior;
+import com.hamiko.galaxyintruder.game.Game;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.graphics.manager.enemies.BasicSmallShipGraphics;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
+import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.physics.Position;
 import com.hamiko.galaxyintruder.window.Screen;
 
-public class BasicSmallShip extends Entity {
+public class BasicSmallShip extends Enemy {
 
     private GraphicsManager graphicsManager = new BasicSmallShipGraphics();
-    private SimpleHitBoxManager hitBoxManager;
+    private BasicSmallShipAI behavior = new BasicSmallShipAI();
+    private SimpleHitBoxManager hitBoxManager = new SimpleHitBoxManager(this);
+    private Gun gun;
 
-    public BasicSmallShip(Position position) {
+    private static final int BASE_HEALTH = 100;
+
+    public BasicSmallShip(GameLevel level, Position position) {
+        super(level, BASE_HEALTH);
+
         getPosition().setLocation(position);
-        hitBoxManager = new SimpleHitBoxManager(this);
     }
 
-    public BasicSmallShip(int x, int y) {
+    public BasicSmallShip(GameLevel level, int x, int y) {
+        super(level, BASE_HEALTH);
+
         setX(x);
         setY(y);
 
         hitBoxManager = new SimpleHitBoxManager(this);
+
     }
 
-    public BasicSmallShip() {
+    public BasicSmallShip(GameLevel level) {
+        super(level, BASE_HEALTH);
+        this.gun = new Gun(level);
+
+        int yOffset = GameScale.yScale(20);
         setX(Screen.getInstance().getWidth() / 2);
-        setY(getHeight() / 2);
+        setY(getHeight() / 2 + yOffset);
 
         hitBoxManager = new SimpleHitBoxManager(this);
     }
@@ -38,12 +54,21 @@ public class BasicSmallShip extends Entity {
     }
 
     @Override
-    public void update() {
-
+    public HitBoxManager getHitBoxManager() {
+        return hitBoxManager;
     }
 
     @Override
-    public HitBoxManager getHitBoxManager() {
-        return hitBoxManager;
+    public void update() {
+        getBehavior().act(this);
+    }
+
+    @Override
+    public Behavior getBehavior() {
+        return behavior;
+    }
+
+    public Gun getGun() {
+        return gun;
     }
 }

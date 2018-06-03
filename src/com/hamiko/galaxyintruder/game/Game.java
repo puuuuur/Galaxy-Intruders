@@ -1,6 +1,7 @@
 package com.hamiko.galaxyintruder.game;
 
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
+import com.hamiko.galaxyintruder.statemachine.State;
 import com.hamiko.galaxyintruder.window.Screen;
 
 public class Game implements Runnable {
@@ -29,10 +30,8 @@ public class Game implements Runnable {
         double delta = 0;
         int updates = 0;
 
+        gsm.setActiveState(State.GAME_PLAY);
         screen.setOnCloseEvent(this::stopGame);
-        screen.setGameView(gsm.getActiveState().getView());
-        gsm.getActiveState().getView().addKeyListener(gsm.getActiveState().getInput());
-        gsm.getActiveState().getView().requestFocus();
 
         //new Thread(screen, "SCREEN_THREAD").start();
 

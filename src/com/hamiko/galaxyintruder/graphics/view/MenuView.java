@@ -8,21 +8,21 @@ import java.awt.*;
 public class MenuView extends GameView {
 
     private Font titleFont;
-
+    ScaledGraphics gx = new ScaledGraphics();
     public MenuView() {
-        titleFont = new Font("TimesRoman", Font.PLAIN, (int) (100 * GameScale.xScale()));
+        titleFont = new Font("TimesRoman", Font.PLAIN, GameScale.xScale(16));
     }
 
     @Override
     public void render(Graphics g) {
 
-        ScaledGraphics gx = new ScaledGraphics(g);
+        gx.setGraphics(g);
 
         gx.getGraphics().setFont(titleFont);
         gx.getGraphics().setColor(Color.WHITE);
-        gx.drawString("Galaxy Intruders", 200, 150);
+        gx.drawString("Galaxy Intruders", 30, 30);
 
-        gx.getGraphics().setFont(new Font("TimesRoman", Font.PLAIN, (int) (12 * GameScale.xScale())));
+        gx.getGraphics().setFont(new Font("TimesRoman", Font.PLAIN, GameScale.xScale(12)));
 
     }
 }

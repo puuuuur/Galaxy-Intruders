@@ -1,18 +1,15 @@
 package com.hamiko.galaxyintruder.level;
 
-import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.entities.EntityPool;
+import com.hamiko.galaxyintruder.entities.enemies.Enemy;
 import com.hamiko.galaxyintruder.entities.player.Player;
-
-import java.util.ArrayList;
-import java.util.EmptyStackException;
+import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
 
 public class GameLevel {
 
-    private EntityPool<Entity> enemyPool = new EntityPool<>();
-    private EntityPool<Entity> projectilesPool = new EntityPool<>();
+    private EntityPool<Enemy> enemyPool = new EntityPool<>();
+    private EntityPool<Projectile> projectilesPool = new EntityPool<>();
 
-    ArrayList<Entity> entPool = new ArrayList<>();
     private Player player;
 
     public void update() {
@@ -23,11 +20,11 @@ public class GameLevel {
 
     }
 
-    public EntityPool<Entity> getEnemyPool() {
+    public EntityPool<Enemy> getEnemyPool() {
         return enemyPool;
     }
 
-    public EntityPool<Entity> getProjectilesPool() {
+    public EntityPool<Projectile> getProjectilesPool() {
         return projectilesPool;
     }
 

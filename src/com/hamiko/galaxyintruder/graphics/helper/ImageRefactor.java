@@ -64,7 +64,7 @@ public class ImageRefactor {
             return image;
         }
 
-        // image is not optimized, so create a new image that is
+        // image is not optimized, so getState a new image that is
         BufferedImage newImage = gfxConfig.createCompatibleImage(
                 image.getWidth(), image.getHeight(), image.getTransparency()
         );

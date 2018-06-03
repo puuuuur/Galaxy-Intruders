@@ -9,7 +9,7 @@ public class MainGun {
     SpaceShipInput input;
     GameLevel level;
 
-    private int firingSpeed = 45;//60 is one second
+    private int firingSpeed = 45;//60 is one second NOTE: If fps shall be fluctuating, this WILL need a time scaling
     private int fireRoutine = 0;
     private int firePreload = firingSpeed;
 
@@ -24,13 +24,11 @@ public class MainGun {
 
             if (firingSpeed == fireRoutine || firePreload == firingSpeed) {
 
-                BasicBullet bullet = new BasicBullet(
+                new BasicBullet(
                         player.getX(),
-                        player.getY() - player.getGraphics().getCurrentSprite().getImage().getWidth() / 2,
+                        player.getY() - player.getHeight() / 2,
                         level
                 );
-
-                player.level.getProjectilesPool().add(bullet);
 
                 fireRoutine = 0;
                 firePreload = 0;

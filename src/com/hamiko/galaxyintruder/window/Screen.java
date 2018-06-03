@@ -9,16 +9,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
-public class Screen extends JPanel implements Runnable {
+public class Screen extends JFrame implements Runnable {
 
     private final String GAME_TITEL = "Galaxy Intruders";
 
     private static Screen instance = new Screen();
+
     private GameView activeView;
 
-    private Resolution currentResolution = Resolution._1080p;
-
-    JFrame frame = new JFrame();
+    private Resolution currentResolution = Resolution._720p;
 
     public class Constant {
         final static int BASE_WIDTH = 924;
@@ -35,28 +34,36 @@ public class Screen extends JPanel implements Runnable {
         return Screen.instance;
     }
 
+    public Canvas canvas = new Canvas();
+
     private Screen() {
 
-        //setUndecorated(true);
-        this.createScreenSize(resolutions.getResolution(currentResolution));
+//        setUndecorated(true);
+        setResizable(false);
+        setFocusable(true);
 
-        // add(panel);
-        frame.add(this);
-        frame.setContentPane(this);
-        frame.setSize(resolutions.getResolution(currentResolution));
-        System.out.println(resolutions.getResolution(currentResolution));
-        frame.setResizable(false);
-        frame.setFocusable(true);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setBackground(Color.black);
+        Dimension dimension = resolutions.getResolution(currentResolution);
+
+        canvas.setSize(dimension);
+        add(canvas);
+
+        GameScale.setScaling(
+                dimension.width / (double) Constant.BASE_WIDTH,
+                dimension.height / (double) Constant.BASE_HEIGHT
+        );
+
+        canvas.requestFocus();
+        pack();
+
+        setLocationRelativeTo(null);
+        setVisible(true);
 
     }
 
     public void createScreenSize(Dimension screenSize) {
-        setPreferredSize(screenSize);
+        //  setPreferredSize(screenSize);
         setGameScale(screenSize);
-        frame.pack();
+        pack();
     }
 
     private void setGameScale(Dimension screenSize) {
@@ -66,18 +73,13 @@ public class Screen extends JPanel implements Runnable {
         );
     }
 
-    JPanel panel = new JPanel();
-
     public void setGameView(GameView view) {
-
-        add(view);
-        view.setSize(getSize());
         this.activeView = view;
     }
 
     public void setOnCloseEvent(OnCloseEvent event) {
 
-        frame.addWindowListener(new WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent e) {
 
@@ -105,10 +107,10 @@ public class Screen extends JPanel implements Runnable {
 
     public void render() {
 
-        BufferStrategy bs = activeView.getBufferStrategy();
+        BufferStrategy bs = canvas.getBufferStrategy();
 
         if (bs == null) {
-            activeView.createBufferStrategy(3);
+            canvas.createBufferStrategy(3);
             return;
         }
 
@@ -118,15 +120,17 @@ public class Screen extends JPanel implements Runnable {
 
         activeView.render(g);
 
-        panel.paintComponents(activeView.getGraphics());
-
         g.dispose();
         bs.show();
 
     }
 
     public void updateUPS(int ups) {
-        this.frame.setTitle(GAME_TITEL + " UPS: " + ups);
+        this.setTitle(GAME_TITEL + " UPS: " + ups);
+    }
+
+    public Dimension getCanvasSize() {
+        return canvas.getSize();
     }
 
 }

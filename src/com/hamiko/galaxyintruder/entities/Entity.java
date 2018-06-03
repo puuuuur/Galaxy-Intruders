@@ -2,6 +2,7 @@ package com.hamiko.galaxyintruder.entities;
 
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
+import com.hamiko.galaxyintruder.level.GameLevel;
 import com.hamiko.galaxyintruder.physics.Position;
 
 public abstract class Entity {
@@ -10,6 +11,11 @@ public abstract class Entity {
     //TODO AI
 
     private Position position = new Position();
+    protected GameLevel level;
+
+    public Entity(GameLevel level){
+        this.level = level;
+    }
 
     public int getX() {
         return position.x;
