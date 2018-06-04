@@ -4,7 +4,9 @@ import com.hamiko.galaxyintruder.game.Game;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,15 +27,20 @@ public class Main {
 
     }
 
+    public static BufferedImage background;
+
     private static void loadResources() {
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         try {
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/PressStart2P.ttf")));
+            background = ImageIO.read(new File("res/background/background.png"));
+
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
+
 
     }
 

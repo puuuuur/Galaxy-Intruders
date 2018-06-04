@@ -7,6 +7,7 @@ import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
 import com.hamiko.galaxyintruder.graphics.Drawable;
 import com.hamiko.galaxyintruder.graphics.GameGraphics;
+import com.hamiko.galaxyintruder.graphics.background.BackGroundHandler;
 
 import java.awt.*;
 
@@ -16,8 +17,11 @@ public class GameLevel implements Drawable {
     private EntityPool<Projectile> projectilesPool = new EntityPool<>();
 
     private Player player;
+    private BackGroundHandler background = new BackGroundHandler();
 
     public void update() {
+
+        background.update();
 
         player.update();
         enemyPool.update();
@@ -44,7 +48,9 @@ public class GameLevel implements Drawable {
     @Override
     public void render(GameGraphics gx) {
 
-        //TODO remove this after debuging
+        background.render(gx);
+
+        //TODO remove this after debugging
         gx.getGraphics().setColor(Color.white);
         gx.getGraphics().drawString("Player coords(x: " + Player.global.getX() + " y: " + Player.global.getY() + ")", 5, 12);
 

@@ -3,6 +3,7 @@ package com.hamiko.galaxyintruder.graphics;
 import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
+import com.hamiko.galaxyintruder.graphics.background.Background;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
@@ -61,6 +62,19 @@ public class GameGraphics {
                 entity.getY() - entity.getHeight() / 2,
                 entity.getWidth(),
                 entity.getHeight()
+        );
+
+    }
+
+    public void drawBackground(Background background){
+
+        graphics.drawImage(
+                background.getImage(),
+                background.getPosition().x,
+                background.getPosition().y,
+                background.getImage().getWidth(),
+                background.getImage().getHeight(),
+                screen
         );
 
     }

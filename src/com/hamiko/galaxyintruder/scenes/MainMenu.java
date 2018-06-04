@@ -3,8 +3,11 @@ package com.hamiko.galaxyintruder.scenes;
 import com.hamiko.galaxyintruder.graphics.GUI.MenuControls;
 import com.hamiko.galaxyintruder.graphics.GUI.MenuCursor;
 import com.hamiko.galaxyintruder.physics.GameScale;
+import com.hamiko.galaxyintruder.physics.Position;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
+
+import java.awt.*;
 
 public class MainMenu {
 
@@ -14,12 +17,13 @@ public class MainMenu {
     private enum CursorPosition {START, OPTION, EXIT}
 
     private CursorPosition currentCursorPosition = CursorPosition.START;
-
+    private Position originalCursorPosition;
 
     public MainMenu(MenuControls controls, MenuCursor cursor) {
 
         this.controls = controls;
         this.cursor = cursor;
+        this.originalCursorPosition = new Position(cursor.getPosition());
 
         controls.bindUpEvent(this::cursorUp);
         controls.bindDownEvent(this::cursorDown);
@@ -29,14 +33,17 @@ public class MainMenu {
     }
 
     private void cursorUp() {
-        // cursor.getPosition().move(cursor.getPosition().x, cursor.getPosition().y - GameScale.yScale(20));
 
         if (currentCursorPosition == CursorPosition.START) {
             currentCursorPosition = CursorPosition.EXIT;
-            cursor.getPosition().move(cursor.getPosition().x, cursor.getPosition().y + GameScale.yScale(40));
+            cursor.getPosition().setLocation(originalCursorPosition.x, originalCursorPosition.y + GameScale.yScale(40));
         } else {
-            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION ? CursorPosition.START : CursorPosition.OPTION;
-            cursor.getPosition().move(cursor.getPosition().x, cursor.getPosition().y - GameScale.yScale(20));
+
+            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION
+                    ? CursorPosition.START
+                    : CursorPosition.OPTION;
+            cursor.getPosition().translate(0, -20);
+
         }
 
     }
@@ -45,10 +52,14 @@ public class MainMenu {
 
         if (currentCursorPosition == CursorPosition.EXIT) {
             currentCursorPosition = CursorPosition.START;
-            cursor.getPosition().move(cursor.getPosition().x, cursor.getPosition().y - GameScale.yScale(40));
+            cursor.getPosition().setLocation(originalCursorPosition);
         } else {
-            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION ? CursorPosition.EXIT : CursorPosition.OPTION;
-            cursor.getPosition().move(cursor.getPosition().x, cursor.getPosition().y + GameScale.yScale(20));
+
+            cursor.getPosition().translate(0, 20);
+            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION
+                    ? CursorPosition.EXIT
+                    : CursorPosition.OPTION;
+
         }
 
     }
@@ -59,7 +70,7 @@ public class MainMenu {
             GameStateMachine.getInstance().setActiveState(State.GAME_PLAY);
         } else if (currentCursorPosition == CursorPosition.OPTION) {
             System.out.println("OPEN OPTIONS MENU");
-        }else if (currentCursorPosition == CursorPosition.EXIT) {
+        } else if (currentCursorPosition == CursorPosition.EXIT) {
             System.exit(0);//TODO cleaner exit, like saving shit
         }
     }

@@ -10,7 +10,6 @@ import com.hamiko.galaxyintruder.scenes.MainMenu;
 
 public class MenuState extends GameState {
 
-    private MenuControls controls;
     private MainMenu mainMenu;
 
     public MenuState(GameView view, MenuInput input) {
@@ -18,7 +17,7 @@ public class MenuState extends GameState {
 
         MenuElements menuText = new MenuElements(new Position(100, 100));
         MenuCursor cursor = new MenuCursor(new Position(-14, 30), menuText.getPosition());
-        controls = new MenuControls(input);
+        MenuControls controls = new MenuControls(input);
 
         mainMenu = new MainMenu(controls, cursor);
 

@@ -3,6 +3,8 @@ package com.hamiko.galaxyintruder.graphics.elements;
 import com.hamiko.galaxyintruder.graphics.Drawable;
 import com.hamiko.galaxyintruder.physics.Position;
 
+import java.awt.*;
+
 public abstract class GraphicElement implements Drawable {
 
     private Position position;

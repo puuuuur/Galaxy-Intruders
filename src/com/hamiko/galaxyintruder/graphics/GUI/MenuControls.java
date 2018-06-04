@@ -1,6 +1,6 @@
 package com.hamiko.galaxyintruder.graphics.GUI;
 
-import com.hamiko.galaxyintruder.helper.OnButtonPressed;
+import com.hamiko.galaxyintruder.input.OnButtonPressed;
 import com.hamiko.galaxyintruder.input.MenuInput;
 
 /**

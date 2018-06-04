@@ -30,6 +30,25 @@ public class ImageRefactor {
 
     }
 
+    /**
+     * Get a resized version of inputImage
+     *
+     * @param inputImage    Input image
+     * @return Resized image
+     */
+    public static BufferedImage resize(BufferedImage inputImage, int newWidth, int newHeight) {
+
+        BufferedImage outputImage = createCompatibleImage(
+                new BufferedImage(newWidth, newHeight, inputImage.getType()));
+
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(inputImage, 0, 0, newWidth, newHeight, null);
+        g2d.dispose();
+
+        return outputImage;
+
+    }
+
     public static BufferedImage flipHorizontally(BufferedImage inputImage) {
 
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);

@@ -9,7 +9,7 @@ public class Position extends Point {
     }
 
     public Position(int x, int y) {
-        super((int)(x * GameScale.xScale()), (int)(y * GameScale.yScale()));
+        super(GameScale.xScale(x), GameScale.yScale(y));
     }
 
     public Position(Position position) {
@@ -17,7 +17,7 @@ public class Position extends Point {
     }
 
     public void translate(int dx, int dy) {
-        super.translate((int) (dx + GameScale.xScale()), (int) (dy + GameScale.yScale()));
+        super.translate(GameScale.xScale(dx),  + GameScale.yScale(dy));
     }
 
 }

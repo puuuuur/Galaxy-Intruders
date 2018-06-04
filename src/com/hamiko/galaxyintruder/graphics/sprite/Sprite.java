@@ -29,7 +29,7 @@ public class Sprite  {
 
     }
 
-    Sprite(BufferedImage image){
+    public Sprite(BufferedImage image){
        this.image = image;
        this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
     }

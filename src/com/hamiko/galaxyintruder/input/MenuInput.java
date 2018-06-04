@@ -15,17 +15,10 @@ public class MenuInput extends InputHandler {
 
     }
 
-    boolean upPressed = false;
-
-
     public boolean up() {
         return keyMap.get(KeyEvent.VK_W);
     }
 
-
-    boolean downPressed = false;
-
-    //TODO register only one press and ignore until key up
     public boolean down() {
         return keyMap.get(KeyEvent.VK_S);
     }
