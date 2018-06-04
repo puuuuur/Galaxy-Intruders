@@ -7,20 +7,20 @@ import com.hamiko.galaxyintruder.physics.Position;
 
 import java.awt.*;
 
-public class MenuArrow extends GraphicElement {
+public class MenuCursor extends GraphicElement {
 
     private Polygon shape;
     private Color color = Color.WHITE;
     private Position oldPosition;
 
-    public MenuArrow(Position position, Position relativePosition) {
+    public MenuCursor(Position position, Position relativePosition) {
         super(position, relativePosition);
         oldPosition = new Position(position);
         this.shapePolygon();
 
     }
 
-    public MenuArrow(Position position) {
+    public MenuCursor(Position position) {
         super(position);
         this.shapePolygon();
     }
@@ -42,8 +42,6 @@ public class MenuArrow extends GraphicElement {
         shape = new Polygon(xPoints, yPoints, 3);
 
     }
-
-
 
     @Override
     public void render(GameGraphics gg) {

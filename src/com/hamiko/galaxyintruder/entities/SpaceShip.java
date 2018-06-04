@@ -1,6 +1,6 @@
 package com.hamiko.galaxyintruder.entities;
 
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public abstract class SpaceShip extends Entity {
 

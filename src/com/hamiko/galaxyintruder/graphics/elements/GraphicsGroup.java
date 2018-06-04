@@ -19,7 +19,7 @@ public abstract class GraphicsGroup extends GraphicElement {
     }
 
     /**
-     * Used to populates the elements instance variable
+     * Used to populate the elements class variable
      *
      * @return Collection of graphic elements to draw in this group
      */

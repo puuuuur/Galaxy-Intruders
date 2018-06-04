@@ -1,7 +1,7 @@
 package com.hamiko.galaxyintruder.entities.projectiles;
 
 import com.hamiko.galaxyintruder.entities.Entity;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public abstract class Projectile extends Entity {
 

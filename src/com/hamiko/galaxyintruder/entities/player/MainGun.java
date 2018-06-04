@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.entities.player;
 
 import com.hamiko.galaxyintruder.entities.projectiles.BasicBullet;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public class MainGun {
 

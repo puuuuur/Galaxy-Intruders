@@ -6,7 +6,7 @@ import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 

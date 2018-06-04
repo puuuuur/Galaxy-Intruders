@@ -1,7 +1,7 @@
 package com.hamiko.galaxyintruder.entities.enemies;
 
 import com.hamiko.galaxyintruder.entities.projectiles.EnemyBullet;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public class Gun {
 

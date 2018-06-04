@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.level;
+package com.hamiko.galaxyintruder.scenes;
 
 import com.hamiko.galaxyintruder.entities.EntityPool;
 import com.hamiko.galaxyintruder.entities.SpaceShip;

@@ -5,7 +5,7 @@ import com.hamiko.galaxyintruder.entities.player.MainGun;
 import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.graphics.view.GameView;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
 

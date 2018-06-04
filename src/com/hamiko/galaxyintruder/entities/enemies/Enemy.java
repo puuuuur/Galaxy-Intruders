@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.entities.enemies;
 
 import com.hamiko.galaxyintruder.ai.Behavior;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public abstract class Enemy extends SpaceShip{
 

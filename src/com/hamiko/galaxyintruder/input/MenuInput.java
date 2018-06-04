@@ -27,19 +27,7 @@ public class MenuInput extends InputHandler {
 
     //TODO register only one press and ignore until key up
     public boolean down() {
-
-        if (!downPressed) {
-            downPressed = true;
-            return keyMap.get(KeyEvent.VK_S);
-        } else {
-
-            if (!keyMap.get(KeyEvent.VK_S)) {
-                downPressed = false;
-            }
-        }
-
-        return false;
-
+        return keyMap.get(KeyEvent.VK_S);
     }
 
     public boolean confirm() {

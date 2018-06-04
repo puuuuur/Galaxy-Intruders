@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.entities;
 
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.Position;
 
 public abstract class Entity {

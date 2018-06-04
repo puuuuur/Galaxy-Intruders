@@ -4,7 +4,7 @@ import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.graphics.manager.PlayerGraphics;
 import com.hamiko.galaxyintruder.hitbox.PlayerHitBoxManager;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
-import com.hamiko.galaxyintruder.level.GameLevel;
+import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 
@@ -30,7 +30,7 @@ public class Player extends SpaceShip {
         final int startOffset = GameScale.yScale(10) + getHeight() / 2;
 
         int xPos = Screen.getInstance().getCanvasSize().width / 2;
-        int yPos = Screen.getInstance().getCanvasSize().height - startOffset;//TODO Init player position in level
+        int yPos = Screen.getInstance().getCanvasSize().height - startOffset;//TODO Init player position in scenes
 
         setX(xPos);
         setY(yPos);
@@ -62,7 +62,7 @@ public class Player extends SpaceShip {
         if (getHealth() <= 0) {
 
             System.out.println("TRIGGER GAME OVER");
-            //TODO tell the level that a game over has occurred
+            //TODO tell the scenes that a game over has occurred
 
         }
 
