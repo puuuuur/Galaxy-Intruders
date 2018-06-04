@@ -2,7 +2,6 @@ package com.hamiko.galaxyintruder.statemachine.states;
 
 import com.hamiko.galaxyintruder.graphics.view.GameView;
 import com.hamiko.galaxyintruder.input.InputHandler;
-import com.hamiko.galaxyintruder.statemachine.State;
 
 public abstract class GameState {
 
@@ -13,8 +12,6 @@ public abstract class GameState {
         this.view = view;
         this.input = input;
     }
-
-    public abstract State getStateName();
 
     public abstract void update();
 

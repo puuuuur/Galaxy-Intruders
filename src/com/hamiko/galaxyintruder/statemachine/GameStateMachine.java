@@ -1,8 +1,6 @@
 package com.hamiko.galaxyintruder.statemachine;
 
-import com.hamiko.galaxyintruder.graphics.view.GamePlayView;
-import com.hamiko.galaxyintruder.graphics.view.MenuView;
-import com.hamiko.galaxyintruder.graphics.view.PauseView;
+import com.hamiko.galaxyintruder.graphics.view.GameView;
 import com.hamiko.galaxyintruder.input.MenuInput;
 import com.hamiko.galaxyintruder.input.PauseInput;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
@@ -24,9 +22,9 @@ public class GameStateMachine {
 
     private GameStateMachine() {
 
-        statesContainer.put(State.PAUSE, new PauseState(new PauseView(), new PauseInput()));
-        statesContainer.put(State.MENU, new MenuState(new MenuView(), new MenuInput()));
-        statesContainer.put(State.GAME_PLAY, new GamePlayState(new GamePlayView(), new SpaceShipInput()));
+        statesContainer.put(State.PAUSE, new PauseState(new GameView(), new PauseInput()));
+        statesContainer.put(State.MENU, new MenuState(new GameView(), new MenuInput()));
+        statesContainer.put(State.GAME_PLAY, new GamePlayState(new GameView(), new SpaceShipInput()));
 
         this.activeState = statesContainer.get(State.MENU);
 

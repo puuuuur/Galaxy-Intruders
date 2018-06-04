@@ -30,10 +30,10 @@ public class ScaledDimension extends Dimension {
 
     /**
      * Scaled variant of setSize, will not rescale
-     * @param dimension
+     * @param sd Provided Scaled dimension will not add new scaling
      */
-    void setSize(ScaledDimension dimension){
-        super.setSize(dimension.width, dimension.height);
+    void setSize(ScaledDimension sd){
+        super.setSize(sd.width, sd.height);
     }
 
 }

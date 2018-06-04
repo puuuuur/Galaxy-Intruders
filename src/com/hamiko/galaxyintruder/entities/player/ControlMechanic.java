@@ -75,9 +75,7 @@ public class ControlMechanic {
 
             }
 
-
         } else {
-
             player.getGraphics().setCurrentSprite(player.getGraphics().getDefaultSprite());
         }
 
