@@ -10,30 +10,7 @@ public class ImageRefactor {
     /**
      * Get a resized version of inputImage
      *
-     * @param inputImage    Input image
-     * @param scalingFactor Scaling factor for image width and height
-     * @return Resized image
-     */
-    public static BufferedImage resize(BufferedImage inputImage) {
-
-        int scaledWidth = inputImage.getWidth();
-        int scaledHeight = inputImage.getHeight();
-
-        BufferedImage outputImage = createCompatibleImage(
-                new BufferedImage(scaledWidth, scaledHeight, inputImage.getType()));
-
-        Graphics2D g2d = outputImage.createGraphics();
-        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
-        g2d.dispose();
-
-        return outputImage;
-
-    }
-
-    /**
-     * Get a resized version of inputImage
-     *
-     * @param inputImage    Input image
+     * @param inputImage Input image
      * @return Resized image
      */
     public static BufferedImage resize(BufferedImage inputImage, int newWidth, int newHeight) {
@@ -62,8 +39,7 @@ public class ImageRefactor {
 
         AffineTransform tx = AffineTransform.getScaleInstance(-1, -1);
         tx.translate(-inputImage.getWidth(null), -inputImage.getHeight(null));
-        AffineTransformOp op = new AffineTransformOp(tx,
-                AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         return op.filter(inputImage, null);
 
     }

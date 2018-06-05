@@ -1,8 +1,10 @@
 package com.hamiko.galaxyintruder.game;
 
+import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
+import com.hamiko.galaxyintruder.system.PerformanceTracker;
 
 public class Game implements Runnable {
 
@@ -20,41 +22,51 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
+        gameLoop();
+    }
+
+    private void gameLoop() {
 
         isRunning = true;
-
-        long lastTime = System.nanoTime();
-        long timer = System.currentTimeMillis();
-
-        final double ns = 1000000000.0 / 60.0;
-        double delta = 0;
-        int updates = 0;
 
         gsm.setActiveState(State.MENU);
         screen.setOnCloseEvent(this::stopGame);
 
-        //new Thread(screen, "SCREEN_THREAD").start();
+        final int TICKS_PER_SECOND = 60;
+        final long SKIP_TICKS = 1000000000 / TICKS_PER_SECOND;
+        final int MAX_FRAMESKIP = 5;
+
+        long next_game_tick = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        int loops;
+
+        int fps = 0;
+
+        int updates = 0;
 
         while (isRunning) {
 
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-
-            while (delta >= 1) {
-
+            loops = 0;
+            while (System.nanoTime() > next_game_tick && loops < MAX_FRAMESKIP) {
                 update();
-                screen.render();
-                delta--;
+                next_game_tick += SKIP_TICKS;
+                loops++;
                 updates++;
-
             }
+
+            GameScale.setFrameInterpolation(
+                    (float) (System.nanoTime() + SKIP_TICKS - next_game_tick) / (float) (SKIP_TICKS));
+
+            screen.render();
+            fps++;
 
             if (System.currentTimeMillis() - timer > 1000) {
 
-                screen.updateUPS(updates);
+                PerformanceTracker.updateValues(updates, fps);
+
                 timer += 1000;
                 updates = 0;
+                fps = 0;
 
             }
 

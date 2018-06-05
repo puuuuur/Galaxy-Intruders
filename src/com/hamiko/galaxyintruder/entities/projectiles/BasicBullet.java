@@ -67,15 +67,15 @@ public class BasicBullet extends Projectile {
             return;
         }
 
-        setY(getY() - speed);
+        setY((int)(getY() - speed * GameScale.interpolation()));
 
     }
 
-    public int hitSurfaceXLeft() {
+    private int hitSurfaceXLeft() {
         return getX() - getWidth() / 2;
     }
 
-    public int hitSurfaceXRight() {
+    private int hitSurfaceXRight() {
         return getX() + getWidth() / 2;
     }
 

@@ -44,9 +44,9 @@ public class GameStateMachine {
 
         //TODO Proper key listener handling
         //IDEA: keep th same input, just change the map
-        Screen.getInstance().canvas.removeKeyListener(activeState.getInput());
+        Screen.getInstance().getCanvas().removeKeyListener(activeState.getInput());
         this.activeState = statesContainer.get(gameState);
-        Screen.getInstance().canvas.addKeyListener(activeState.getInput());
+        Screen.getInstance().getCanvas().addKeyListener(activeState.getInput());
         Screen.getInstance().setGameView(activeState.getView());
 
     }

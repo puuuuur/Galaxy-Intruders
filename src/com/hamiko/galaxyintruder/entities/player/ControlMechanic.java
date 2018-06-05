@@ -1,5 +1,7 @@
 package com.hamiko.galaxyintruder.entities.player;
 
+import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
+import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
@@ -10,15 +12,20 @@ public class ControlMechanic {
     private Player player;
 
     private int speed = GameScale.xScale(3);
+    private int baseSpeed = speed;
     private double rightAccel = 1;
     private double leftAccel = 1;
-    private double accelRactor = 0.001d;
+    private double accelFactor = 0.001d;
 
     private int maxSpeed = 5;
+
+    private Sprite playerLeft;
 
     public ControlMechanic(Player player, SpaceShipInput input) {
         this.player = player;
         this.input = input;
+        //TODO show sprites with animation manager
+        playerLeft = new Sprite(ImageRefactor.flipHorizontally(player.getGraphics().getSpriteSheet().getSprite(0, 1).getImage()));
     }
 
     //TODO make this properly
@@ -26,18 +33,20 @@ public class ControlMechanic {
     //probable solution: give this method to animation, and return some kind of status (Enum ?)
     void handlePlayerMovement() {
 
+        speed *= GameScale.interpolation();
+
         if (input.left() && input.right()) {
             player.setX(player.getX());
             rightAccel = 0;
             leftAccel = 0;
-            player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipDefault());
+            player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getSprite(0,0));
         } else if ((input.left() || input.right())) {
 
             if (input.left()) {
 
                 if (leftAccel < maxSpeed) {
-                    leftAccel += accelRactor;
-                    player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipLeft());
+                    leftAccel += accelFactor;
+                    player.getGraphics().setCurrentSprite(playerLeft);
                 }
 
             } else {
@@ -47,9 +56,8 @@ public class ControlMechanic {
             if (input.right()) {
 
                 if (rightAccel < maxSpeed) {
-                    rightAccel += accelRactor;
-                    player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getShipRight());
-
+                    rightAccel += accelFactor;
+                    player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getSprite(0, 1));
                 }
 
             } else {
@@ -78,6 +86,8 @@ public class ControlMechanic {
         } else {
             player.getGraphics().setCurrentSprite(player.getGraphics().getDefaultSprite());
         }
+
+        speed = baseSpeed;
 
     }
 

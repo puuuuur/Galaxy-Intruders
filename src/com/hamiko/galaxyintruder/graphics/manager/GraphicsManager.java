@@ -10,6 +10,7 @@ public abstract class GraphicsManager {
     private Sprite currentSprite;
 
     public abstract SpriteSheet getSpriteSheet();
+
     public abstract AnimationStudio getAnimations();
 
     public Sprite getDefaultSprite() {

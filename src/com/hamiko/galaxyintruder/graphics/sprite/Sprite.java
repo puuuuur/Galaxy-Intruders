@@ -2,36 +2,29 @@ package com.hamiko.galaxyintruder.graphics.sprite;
 
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
 import com.hamiko.galaxyintruder.physics.ScaledDimension;
+import com.hamiko.galaxyintruder.resource.ResourceHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-public class Sprite  {
+public class Sprite {
 
     private BufferedImage image;
 
     private ScaledDimension dimension;
 
-    public Sprite(String uri){
+    public Sprite(String uri) {
 
-        try {
+        BufferedImage img = ResourceHandler.getImage(uri);
 
-            BufferedImage img = ImageIO.read(new File(uri));
+        this.image = ImageRefactor.createCompatibleImage(img);
+        this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
 
-            this.image = ImageRefactor.createCompatibleImage(img);
-            this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
-
-        } catch (IOException ex) {
-            // TODO handle exception...
-        }
 
     }
 
-    public Sprite(BufferedImage image){
-       this.image = image;
-       this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
+    public Sprite(BufferedImage image) {
+        this.image = image;
+        this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
     }
 
     public BufferedImage getImage() {
@@ -42,4 +35,7 @@ public class Sprite  {
         return dimension;
     }
 
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
 }

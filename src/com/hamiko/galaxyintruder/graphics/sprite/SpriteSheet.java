@@ -1,17 +1,16 @@
 package com.hamiko.galaxyintruder.graphics.sprite;
 
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
+import com.hamiko.galaxyintruder.resource.ResourceHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class SpriteSheet {
 
-    protected Sprite[][] sprites;
+    private Sprite[][] sprites;
 
-    public SpriteSheet(String uri, int bit, int xTiles, int yTiles) {
+    SpriteSheet(String uri, int bit, int xTiles, int yTiles) {
 
         sprites = new Sprite[yTiles][xTiles];
 
@@ -53,7 +52,7 @@ public class SpriteSheet {
 
     private BufferedImage loadImage(String uri) throws IOException {
 
-        BufferedImage img = ImageIO.read(new File(uri));
+        BufferedImage img = ResourceHandler.getImage(uri);
         return ImageRefactor.createCompatibleImage(img);
 
     }

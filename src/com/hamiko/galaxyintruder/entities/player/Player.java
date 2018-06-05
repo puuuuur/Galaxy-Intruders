@@ -10,27 +10,22 @@ import com.hamiko.galaxyintruder.graphics.window.Screen;
 
 public class Player extends SpaceShip {
 
-    public static Player global;//Used to display player position for debugging purposes TODO remove after done
-
     private PlayerGraphics spriteManager = new PlayerGraphics();
     private ControlMechanic controls;
     private MainGun mainGun;
     private PlayerHitBoxManager hitbox;
 
-    public GameLevel level;
-
     public Player(SpaceShipInput input, GameLevel level, MainGun gun) {
+
         super(level, 200);
-        global = this;//TODO remove this after game is done
 
         this.mainGun = gun;
         this.controls = new ControlMechanic(this, input);
 
-//        final int startOffset = GameScale.yScale(20);
         final int startOffset = GameScale.yScale(10) + getHeight() / 2;
 
-        int xPos = Screen.getInstance().getCanvasSize().width / 2;
-        int yPos = Screen.getInstance().getCanvasSize().height - startOffset;//TODO Init player position in scenes
+        int xPos = Screen.getInstance().getCanvas().getWidth() / 2;
+        int yPos = Screen.getInstance().getCanvas().getHeight() - startOffset;//TODO Init player position in scenes
 
         setX(xPos);
         setY(yPos);

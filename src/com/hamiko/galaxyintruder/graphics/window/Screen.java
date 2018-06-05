@@ -1,8 +1,8 @@
 package com.hamiko.galaxyintruder.graphics.window;
 
-import com.hamiko.galaxyintruder.graphics.background.Background;
 import com.hamiko.galaxyintruder.graphics.view.GameView;
 import com.hamiko.galaxyintruder.physics.GameScale;
+import com.hamiko.galaxyintruder.system.PerformanceTracker;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +12,11 @@ import java.awt.image.BufferStrategy;
 
 public class Screen extends JFrame implements Runnable {
 
-    private final String GAME_TITEL = "Galaxy Intruders";
     private static Screen instance = new Screen();
     private GameView activeView;
-    private Resolution currentResolution = Resolution._1080p;
+    private Resolution currentResolution = Resolution._270p;
     //private final Color BACKGROUND_COLOR = new Color(48, 54, 85);
+
     private final Color BACKGROUND_COLOR = Color.BLACK;
 
     public class Constant {
@@ -34,16 +34,22 @@ public class Screen extends JFrame implements Runnable {
         return Screen.instance;
     }
 
-    public Canvas canvas = new Canvas();
+    private Canvas canvas = new Canvas();
 
     private Screen() {
 
         setUndecorated(true);
         setResizable(false);
         setFocusable(true);
+        setBackground(Color.BLACK);
+        setTitle("Galaxy Intruders");
 
+        //TODO add native resolution to resolution map
         Dimension dimension = resolutions.getResolution(currentResolution);
-
+        Dimension nativeResolution = Toolkit.getDefaultToolkit().getScreenSize();
+        dimension = nativeResolution;
+        
+        canvas.setBackground(BACKGROUND_COLOR);
         canvas.setSize(dimension);
         add(canvas);
 
@@ -57,6 +63,8 @@ public class Screen extends JFrame implements Runnable {
         setLocationRelativeTo(null);
         setVisible(true);
         canvas.requestFocus();
+
+
 
     }
 
@@ -107,17 +115,14 @@ public class Screen extends JFrame implements Runnable {
 
         activeView.render(g);
 
+        PerformanceTracker.render(g);
         g.dispose();
         bs.show();
 
     }
 
-    public void updateUPS(int ups) {
-        this.setTitle(GAME_TITEL + " UPS: " + ups);
-    }
-
-    public Dimension getCanvasSize() {
-        return canvas.getSize();
+    public Canvas getCanvas() {
+        return canvas;
     }
 
 }

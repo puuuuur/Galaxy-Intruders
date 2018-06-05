@@ -6,8 +6,8 @@ import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public class MainGun {
 
-    SpaceShipInput input;
-    GameLevel level;
+    private SpaceShipInput input;
+    private GameLevel level;
 
     private int firingSpeed = 45;//60 is one second NOTE: If fps shall be fluctuating, this WILL need a time scaling
     private int fireRoutine = 0;
@@ -18,7 +18,7 @@ public class MainGun {
         this.level = level;
     }
 
-    public void fireMainWeapon(Player player) {
+    void fireMainWeapon(Player player) {
 
         if (input.fire()) {
 
@@ -45,9 +45,9 @@ public class MainGun {
             }
 
             fireRoutine = 0;
+
         }
 
     }
-
 
 }

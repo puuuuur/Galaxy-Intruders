@@ -9,8 +9,6 @@ import com.hamiko.galaxyintruder.graphics.Drawable;
 import com.hamiko.galaxyintruder.graphics.GameGraphics;
 import com.hamiko.galaxyintruder.graphics.background.BackGroundHandler;
 
-import java.awt.*;
-
 public class GameLevel implements Drawable {
 
     private EntityPool<Enemy> enemyPool = new EntityPool<>();
@@ -49,10 +47,6 @@ public class GameLevel implements Drawable {
     public void render(GameGraphics gx) {
 
         background.render(gx);
-
-        //TODO remove this after debugging
-        gx.getGraphics().setColor(Color.white);
-        gx.getGraphics().drawString("Player coords(x: " + Player.global.getX() + " y: " + Player.global.getY() + ")", 5, 12);
 
         gx.drawSpaceShip(player);
 

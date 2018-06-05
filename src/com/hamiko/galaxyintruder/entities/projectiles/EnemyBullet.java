@@ -16,10 +16,13 @@ public class EnemyBullet extends Projectile {
     private SimpleHitBoxManager hitBoxManager;
     private int speed = GameScale.yScale(3);
     private int power = 10;
-
+    private boolean isKilled = false;
 
     public EnemyBullet(int x, int y, GameLevel level) {
         super(level);
+
+        spriteManager.rotateSprite(0, 0);
+
         setLocation(x, y);
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
@@ -30,8 +33,6 @@ public class EnemyBullet extends Projectile {
     @Override
     public void update() {
 
-
-        boolean isKilled = false;
 
         Player player = level.getPlayer();
 
@@ -66,11 +67,11 @@ public class EnemyBullet extends Projectile {
 
     }
 
-    public int hitSurfaceXLeft() {
+    private int hitSurfaceXLeft() {
         return getX() - getWidth() / 2;
     }
 
-    public int hitSurfaceXRight() {
+    private int hitSurfaceXRight() {
         return getX() + getWidth() / 2;
     }
 

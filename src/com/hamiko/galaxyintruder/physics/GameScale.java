@@ -7,6 +7,8 @@ public class GameScale {
     private static double xScale;
     private static double yScale;
 
+    private static double frameInterpolation = 1;
+
     private final static GameScale instance = new GameScale();
 
     private GameScale() {
@@ -48,4 +50,11 @@ public class GameScale {
         return (int)(yScale * val);
     }
 
+    public static double interpolation() {
+        return frameInterpolation;
+    }
+
+    public static void setFrameInterpolation(double frameInterpolation) {
+        GameScale.frameInterpolation = frameInterpolation;
+    }
 }
