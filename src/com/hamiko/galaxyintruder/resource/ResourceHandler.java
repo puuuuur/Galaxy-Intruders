@@ -15,10 +15,10 @@ public class ResourceHandler {
     private static Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /**
-     * Get an image resource. Resourse is stored
+     * Get an image resource. Resource is cached
      *
-     * @param uri
-     * @return
+     * @param uri Image path
+     * @return Cached or read Image
      */
     public static BufferedImage getImage(String uri) {
 

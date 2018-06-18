@@ -18,11 +18,10 @@ public class BasicSmallShip extends Enemy {
     private SimpleHitBoxManager hitBoxManager = new SimpleHitBoxManager(this);
     private Gun gun;
 
-    private static final int BASE_HEALTH = 100;
+    private static final int BASE_HEALTH = 30;
 
     public BasicSmallShip(GameLevel level, Position position) {
         super(level, BASE_HEALTH);
-
         getPosition().setLocation(position);
     }
 
@@ -47,6 +46,10 @@ public class BasicSmallShip extends Enemy {
         hitBoxManager = new SimpleHitBoxManager(this);
     }
 
+    public Gun getGun() {
+        return gun;
+    }
+
     @Override
     public GraphicsManager getGraphics() {
         return graphicsManager;
@@ -67,7 +70,9 @@ public class BasicSmallShip extends Enemy {
         return behavior;
     }
 
-    public Gun getGun() {
-        return gun;
+    @Override
+    public int getPoints() {
+        return 100;
     }
+
 }
