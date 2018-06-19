@@ -25,9 +25,8 @@ public class BasicBullet extends Projectile {
         this.hitBoxManager = new SimpleHitBoxManager(this);
         level.getProjectilesPool().add(this);
         SoundManager p = new SoundManager();
-        p.loadSoundEffects("laser", "res/sounds/laser.wav");
+        p.loadSoundEffects("laser", "res/sounds/blaster-firing.wav");
         p.playSound("laser");
-
 
     }
 

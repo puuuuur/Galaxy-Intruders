@@ -1,8 +1,5 @@
 package com.hamiko.galaxyintruder.sound;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -13,32 +10,60 @@ import java.util.concurrent.Executors;
 
 public class SoundManager {
 
-
     ExecutorService soundPool = Executors.newFixedThreadPool(2);
-    Map<String, Media> soundMap = new HashMap<>();
+    Map<String, SourceDataLine> soundInfoMap = new HashMap<>();
     Map<String, AudioInputStream> soundEffectsMap = new HashMap<>();
 
-    public void loadSoundEffects(String id,String url) {
-        Media sound = new Media(new File(url).toURI().toString());
-        soundMap.put(id, sound);
+    private static final int BUFFER_SIZE = 4096;
 
+    public void loadSoundEffects(String id,String url) {
+        File audioFile = new File(url);
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioFormat format = audioStream.getFormat();
+            DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+            SourceDataLine audioLine = (SourceDataLine) AudioSystem.getLine(info);
+
+            audioLine.open(format);
+            soundInfoMap.put(id, audioLine);
+            soundEffectsMap.put(id, audioStream);
+
+        } catch (UnsupportedAudioFileException ex) {
+            System.out.println("The specified audio file is not supported.");
+            ex.printStackTrace();
+        } catch (LineUnavailableException ex) {
+            System.out.println("Audio line for playing back is unavailable.");
+            ex.printStackTrace();
+        } catch (IOException ex) {
+                System.out.println("Error playing the audio file.");
+                ex.printStackTrace();
+            }
     }
 
     public void playSound(final String id) {
         Runnable soundPlay = new Runnable() {
             @Override
             public void run() {
-                    MediaPlayer mediaPlayer = new MediaPlayer(soundMap.get(id));
-                    mediaPlayer.play();
+                try {
+                    soundInfoMap.get(id).start();
+                    byte[] bytesBuffer = new byte[BUFFER_SIZE];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = soundEffectsMap.get(id).read(bytesBuffer)) != -1) {
+                        soundInfoMap.get(id).write(bytesBuffer, 0, bytesRead);
+                    }
+
+                }catch (IOException ex) {
+                    System.out.println("Error playing the audio file.");
+                    ex.printStackTrace();
+                }
             }
         };
         soundPool.execute(soundPlay);
     }
 
     public void getMap (String id) {
-        System.out.println(soundMap.get(id));
-
+        System.out.println(soundInfoMap.get(id));
     }
-
 
 }
