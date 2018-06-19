@@ -9,6 +9,7 @@ import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
 import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
+import com.hamiko.galaxyintruder.sound.SoundManager;
 
 public class EnemyBullet extends Projectile {
 
@@ -27,7 +28,9 @@ public class EnemyBullet extends Projectile {
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
         level.getProjectilesPool().add(this);
-
+        SoundManager p = new SoundManager();
+        p.loadSoundEffects("laser", "res/sounds/blaster-firing.wav");
+        p.playSound("laser");
     }
 
     @Override
