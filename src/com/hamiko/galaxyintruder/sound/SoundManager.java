@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 public class SoundManager {
 
-    ExecutorService soundPool = Executors.newFixedThreadPool(2);
+    ExecutorService soundPool = Executors.newFixedThreadPool(20);
     Map<String, SourceDataLine> soundInfoMap = new HashMap<>();
     Map<String, AudioInputStream> soundEffectsMap = new HashMap<>();
 

@@ -20,13 +20,20 @@ public class BasicSmallShip extends Enemy {
 
     private static final int BASE_HEALTH = 30;
 
+    //TODO erstellen einer Factory
+
     public BasicSmallShip(GameLevel level, Position position) {
         super(level, BASE_HEALTH);
+        this.gun = new Gun(level);
+
         getPosition().setLocation(position);
+
+        hitBoxManager = new SimpleHitBoxManager(this);
     }
 
     public BasicSmallShip(GameLevel level, int x, int y) {
         super(level, BASE_HEALTH);
+        this.gun = new Gun(level);
 
         setX(x);
         setY(y);
@@ -40,8 +47,8 @@ public class BasicSmallShip extends Enemy {
         this.gun = new Gun(level);
 
         int yOffset = GameScale.yScale(20);
-        setX(Screen.getInstance().getWidth() / 2);
-        setY(getHeight() / 2 + yOffset);
+        //setX(Screen.getInstance().getWidth() / 2);
+        //setY(getHeight() / 2 + yOffset);
 
         hitBoxManager = new SimpleHitBoxManager(this);
     }

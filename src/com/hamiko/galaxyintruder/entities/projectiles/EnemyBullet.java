@@ -30,6 +30,7 @@ public class EnemyBullet extends Projectile {
         level.getProjectilesPool().add(this);
         SoundManager p = new SoundManager();
         p.loadSoundEffects("laser", "res/sounds/blaster-firing.wav");
+        p.playSound("laser");
     }
 
     @Override
