@@ -17,8 +17,8 @@ public class BasicBullet extends Projectile {
     private int speed = GameScale.yScale(3);
     private int power = 10;
 
-
     public BasicBullet(int x, int y, GameLevel level) {
+
         super(level);
         setLocation(x, y);
         this.level = level;
@@ -33,7 +33,6 @@ public class BasicBullet extends Projectile {
 
     @Override
     public void update() {
-
 
         boolean isKilled = false;
 

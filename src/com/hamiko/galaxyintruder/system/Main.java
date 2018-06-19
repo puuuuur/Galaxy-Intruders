@@ -10,14 +10,15 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //TODO window before game start for resolution and fullscreen setting
         ResourceHandler.preload();
 
-        Game game = new Game(
+        var game = new Game(
                 Screen.getInstance(),
                 GameStateMachine.getInstance()
         );
 
-        Thread gameThread = new Thread(game, "GAME_THREAD");
+        var gameThread = new Thread(game, "GAME_THREAD");
         game.setGameThread(gameThread);
         gameThread.start();
 

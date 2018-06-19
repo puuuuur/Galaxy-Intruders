@@ -17,10 +17,13 @@ public abstract class Enemy extends SpaceShip{
 
         if (getHealth() <= 0) {
             this.level.getEnemyPool().kill(this);
+            this.level.getScorePanel().updateScore(getPoints());
         }
 
     }
 
     public abstract Behavior getBehavior();
+    public abstract int getPoints();
+
 
 }

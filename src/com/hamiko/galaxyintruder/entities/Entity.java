@@ -51,7 +51,6 @@ public abstract class Entity {
 
     public abstract GraphicsManager getGraphics();
     public abstract HitBoxManager getHitBoxManager();
-
     public abstract void update();
 
 }
