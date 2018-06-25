@@ -26,8 +26,11 @@ public class ScorePanel extends GraphicElement {
         graphics.drawString("SCORE: " + score, this.getPosition().x, this.getPosition().y);
     }
 
-    public void updateScore(int points){
+    public void updateScore(int points) {
         this.score += Math.abs(points);
     }
 
+    public int getScore() {
+        return score;
+    }
 }

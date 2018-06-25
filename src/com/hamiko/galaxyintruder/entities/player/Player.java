@@ -4,24 +4,28 @@ import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.graphics.manager.PlayerGraphics;
 import com.hamiko.galaxyintruder.hitbox.PlayerHitBoxManager;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
+import com.hamiko.galaxyintruder.physics.Position;
 import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
+import com.hamiko.galaxyintruder.statemachine.states.GameOverState;
 
 public class Player extends SpaceShip {
 
     private PlayerGraphics spriteManager = new PlayerGraphics();
     private ControlMechanic controls;
     private MainGun mainGun;
-    private PlayerHitBoxManager hitbox;
+    private PlayerHitBoxManager hitBox;
 
     public Player(SpaceShipInput input, GameLevel level, MainGun gun) {
 
-        super(level, 10);
+        super(level, 50);
 
         this.mainGun = gun;
+        this.mainGun.setOffsetY(-this.getHeight() / 2);
+
         this.controls = new ControlMechanic(this, input);
 
         final int startOffset = GameScale.yScale(10) + getHeight() / 2;
@@ -32,13 +36,13 @@ public class Player extends SpaceShip {
         setX(xPos);
         setY(yPos);
 
-        this.hitbox = new PlayerHitBoxManager(this);
+        this.hitBox = new PlayerHitBoxManager(this);
 
     }
 
     @Override
     public PlayerHitBoxManager getHitBoxManager() {
-        return hitbox;
+        return hitBox;
     }
 
     @Override
@@ -48,7 +52,7 @@ public class Player extends SpaceShip {
 
     public void update() {
         controls.handlePlayerMovement();
-        mainGun.fireMainWeapon(this);
+        mainGun.update(this);
     }
 
     @Override
@@ -57,10 +61,8 @@ public class Player extends SpaceShip {
         super.takeDamage(dmg);
 
         if (getHealth() <= 0) {
-
+            ((GameOverState) GameStateMachine.getInstance().getState(State.GAME_OVER)).setScore(this.level.getScorePanel().getScore());
             GameStateMachine.getInstance().setActiveState(State.GAME_OVER);
-            //TODO tell the scenes that a game over has occurred
-
         }
 
     }

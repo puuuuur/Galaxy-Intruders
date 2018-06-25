@@ -18,13 +18,7 @@ public class GamePlayState extends GameState {
         super(view, input);
 
         activeLevel = new GameLevel();
-        Player player = new Player(input, activeLevel, new MainGun(input, activeLevel));
-
-        activeLevel.getEnemyPool().add(new BasicSmallShip(activeLevel, new Position(240, 30)));
-        activeLevel.getEnemyPool().add(new BasicSmallShip(activeLevel, new Position(170, 30)));
-        activeLevel.getEnemyPool().add(new BasicSmallShip(activeLevel, new Position(100, 30)));
-        activeLevel.getEnemyPool().add(new BasicSmallShip(activeLevel, new Position(30, 30)));
-        activeLevel.setPlayer(player);
+        activeLevel.setPlayer(new Player(input, activeLevel, new MainGun(input, activeLevel)));
 
         view.addElements(activeLevel);
 

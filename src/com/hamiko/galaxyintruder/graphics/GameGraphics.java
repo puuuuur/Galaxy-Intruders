@@ -2,6 +2,7 @@ package com.hamiko.galaxyintruder.graphics;
 
 import com.hamiko.galaxyintruder.entities.Entity;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
+import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
 import com.hamiko.galaxyintruder.graphics.background.Background;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
@@ -47,26 +48,16 @@ public class GameGraphics {
                 screen
         );
 
+        //debug(entity);
+
+    }
+
+    private void debug(Entity entity) {
         renderHitBox(entity, Color.yellow);
         renderPivot(entity, Color.RED);
-        //drawBorder(entity, Color.GREEN);
-
     }
 
-    public void drawBorder(Entity entity, Color color) {
-
-        graphics.setColor(color);
-
-        graphics.drawRect(
-                entity.getX() - entity.getWidth() / 2,
-                entity.getY() - entity.getHeight() / 2,
-                entity.getWidth(),
-                entity.getHeight()
-        );
-
-    }
-
-    public void drawBackground(Background background){
+    public void drawBackground(Background background) {
 
         graphics.drawImage(
                 background.getImage(),
@@ -83,20 +74,28 @@ public class GameGraphics {
 
         if (ship.isDamaged()) {
 
+            int playerOffset = 0;
+            Color healthColor = Color.GREEN;
+
+            if(ship instanceof Player){
+                playerOffset = ship.getHeight() + GameScale.yScale(4);
+                healthColor = Color.CYAN;
+            }
+
             //RED
             graphics.setColor(Color.RED);
             graphics.fillRect(
                     ship.getX() - ship.getWidth() / 2,
-                    ship.getY() - (int) (ship.getHeight() * .6d),
+                    playerOffset + ship.getY() - (int) (ship.getHeight() * .6d),
                     ship.getWidth(),
                     GameScale.yScale(2)
             );
 
             //GREEN
-            graphics.setColor(Color.GREEN);
+            graphics.setColor(healthColor);
             graphics.fillRect(
                     ship.getX() - ship.getWidth() / 2,
-                    ship.getY() - (int) (ship.getHeight() * .6d),
+                    playerOffset + ship.getY() - (int) (ship.getHeight() * .6d),
                     ship.getWidth() * ship.getHealth() / ship.getMaxHealth(),
                     GameScale.yScale(2)
             );

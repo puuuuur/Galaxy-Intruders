@@ -55,4 +55,8 @@ public class GameStateMachine {
         statesContainer.put(State.GAME_PLAY, new GamePlayState(new GameView(), new SpaceShipInput()));
     }
 
+    public GameState getState(State gameState){
+        return this.statesContainer.get(gameState);
+    }
+
 }

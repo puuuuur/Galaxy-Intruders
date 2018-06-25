@@ -12,11 +12,13 @@ public class Main {
     public static void main(String[] args) {
 
         new JFXPanel();
-        BackgroundSound bgs = new BackgroundSound();
-        bgs.run();
 
-        //TODO window before game start for resolution and fullscreen setting
+        BackgroundSound bgs = new BackgroundSound();
+        bgs.play();
+
         ResourceHandler.preload();
+        //Screen.getInstance().setFullScreen(true);
+        Screen.getInstance().init();
 
         Game game = new Game(
                 Screen.getInstance(),

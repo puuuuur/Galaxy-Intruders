@@ -13,7 +13,7 @@ import com.hamiko.galaxyintruder.sound.SoundManager;
 
 public class EnemyBullet extends Projectile {
 
-    private BasicBulletGraphics spriteManager = new BasicBulletGraphics();
+    private BasicBulletGraphics spriteManager = new BasicBulletGraphics("res/entities/projectiles/EnemyBullet.png");
     private SimpleHitBoxManager hitBoxManager;
     private int speed = GameScale.yScale(3);
     private int power = 10;

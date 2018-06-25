@@ -1,5 +1,6 @@
 package com.hamiko.galaxyintruder.scenes;
 
+import com.hamiko.galaxyintruder.ai.director.Director;
 import com.hamiko.galaxyintruder.entities.EntityPool;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.entities.enemies.Enemy;
@@ -13,15 +14,26 @@ import com.hamiko.galaxyintruder.physics.Position;
 
 public class GameLevel implements Drawable {
 
-    private EntityPool<Enemy> enemyPool = new EntityPool<>();
-    private EntityPool<Projectile> projectilesPool = new EntityPool<>();
+    private EntityPool<Enemy> enemyPool;
+    private EntityPool<Projectile> projectilesPool;
 
     private Player player;
-    private BackGroundHandler background = new BackGroundHandler();
-    private ScorePanel scorePanel = new ScorePanel(new Position(1, 3));
+    private Director director;
+
+    private BackGroundHandler background;
+    private ScorePanel scorePanel;
+
+    public GameLevel(){
+        enemyPool = new EntityPool<>();
+        projectilesPool = new EntityPool<>();
+        background = new BackGroundHandler();
+        scorePanel = new ScorePanel(new Position(1, 3));
+        director = new Director(this, enemyPool);
+    }
 
     public void update() {
 
+        director.update();
         background.update();
 
         player.update();

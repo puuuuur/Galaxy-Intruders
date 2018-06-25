@@ -1,5 +1,6 @@
 package com.hamiko.galaxyintruder.entities.player;
 
+import com.hamiko.galaxyintruder.graphics.animation.PlayerAnimation;
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
 import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
@@ -20,19 +21,19 @@ public class ControlMechanic {
     private int maxSpeed = 5;
 
     private Sprite playerLeft;
+    private PlayerAnimation animation;
 
     public ControlMechanic(Player player, SpaceShipInput input) {
 
         this.player = player;
         this.input = input;
         //TODO show sprites with animation manager
+
+        animation = player.getGraphics().getAnimations();
         playerLeft = new Sprite(ImageRefactor.flipHorizontally(player.getGraphics().getSpriteSheet().getSprite(0, 1).getImage()));
 
     }
 
-    //TODO make this properly
-    //ship animation and collision detection should not be handled here
-    //probable solution: give this method to animation, and return some kind of status (Enum ?)
     void handlePlayerMovement() {
 
         speed *= GameScale.interpolation();
@@ -42,7 +43,7 @@ public class ControlMechanic {
             player.setX(player.getX());
             rightAccel = 0;
             leftAccel = 0;
-            player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getSprite(0,0));
+            animation.animateCenter();
 
         } else if ((input.left() || input.right())) {
 
@@ -51,7 +52,7 @@ public class ControlMechanic {
 
                 if (leftAccel < maxSpeed) {
                     leftAccel += accelFactor;
-                    player.getGraphics().setCurrentSprite(playerLeft);
+                    animation.animateLeft();
                 }
 
             } else {
@@ -62,7 +63,7 @@ public class ControlMechanic {
 
                 if (rightAccel < maxSpeed) {
                     rightAccel += accelFactor;
-                    player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getSprite(0, 1));
+                    animation.animateRight();
                 }
 
             } else {
@@ -89,7 +90,7 @@ public class ControlMechanic {
             }
 
         } else {
-            player.getGraphics().setCurrentSprite(player.getGraphics().getDefaultSprite());
+            animation.animateCenter();
         }
 
         speed = baseSpeed;

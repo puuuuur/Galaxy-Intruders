@@ -10,25 +10,22 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
-public class Screen extends JFrame implements Runnable {
-
-    private static Screen instance = new Screen();
-    private GameView activeView;
-    private Resolution currentResolution = Resolution._720p;
-    //private final Color BACKGROUND_COLOR = new Color(48, 54, 85);
+public class Screen extends JFrame {
 
     private final Color BACKGROUND_COLOR = Color.BLACK;
+    private static Screen instance = new Screen();
+
+    private GameView activeView;
+    private ResolutionMap resolutions = new ResolutionMap();
+    private Resolution currentResolution = Resolution._720p;
+
+    private boolean isFullScreen = false;
 
     public class Constant {
         final static int BASE_WIDTH = 924;
         final static int BASE_HEIGHT = 520;
     }
 
-    private boolean isRunning = false;
-    private boolean isFullScreen = false;
-    private static Dimension fullScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-    private ResolutionMap resolutions = new ResolutionMap();
 
     public static Screen getInstance() {
         return Screen.instance;
@@ -37,6 +34,9 @@ public class Screen extends JFrame implements Runnable {
     private Canvas canvas = new Canvas();
 
     private Screen() {
+    }
+
+    public void init() {
 
         //setUndecorated(true);
         setResizable(false);
@@ -45,10 +45,11 @@ public class Screen extends JFrame implements Runnable {
         setTitle("Galaxy Intruders");
 
         //TODO add native resolution to resolution map
-        Dimension dimension = resolutions.getResolution(currentResolution);
         //Dimension nativeResolution = Toolkit.getDefaultToolkit().getScreenSize();
         //dimension = nativeResolution;
-        
+
+        Dimension dimension = getResolution();
+
         canvas.setBackground(BACKGROUND_COLOR);
         canvas.setSize(dimension);
         add(canvas);
@@ -64,8 +65,6 @@ public class Screen extends JFrame implements Runnable {
         setVisible(true);
         canvas.requestFocus();
 
-
-
     }
 
     public void setGameView(GameView view) {
@@ -78,7 +77,6 @@ public class Screen extends JFrame implements Runnable {
 
             public void windowClosing(WindowEvent e) {
 
-                isRunning = false;
                 event.fire();
                 Frame frame = (Frame) e.getSource();
                 frame.dispose();
@@ -87,17 +85,6 @@ public class Screen extends JFrame implements Runnable {
             }
 
         });
-
-    }
-
-    @Override
-    public void run() {
-
-        isRunning = true;
-
-        while (isRunning) {
-            render();
-        }
 
     }
 
@@ -124,6 +111,26 @@ public class Screen extends JFrame implements Runnable {
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    private Dimension getResolution() {
+
+        Dimension resolution;
+
+
+        if (isFullScreen) {
+            setUndecorated(true);
+            resolution = Toolkit.getDefaultToolkit().getScreenSize();
+        } else {
+            resolution = resolutions.getResolution(currentResolution);
+        }
+
+        return resolution;
+
+    }
+
+    public void setFullScreen(boolean fullScreen) {
+        isFullScreen = fullScreen;
     }
 
 }

@@ -37,6 +37,10 @@ public abstract class Entity {
         position.setLocation(x, y);
     }
 
+    public void setLocation(Position position){
+        position.setLocation(position);
+    }
+
     public int getWidth() {
         return (int)getGraphics().getCurrentSprite().getDimension().getWidth();
     }

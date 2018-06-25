@@ -10,8 +10,6 @@ import java.util.Arrays;
 public class GameView {
 
     private ArrayList<Drawable> elements = new ArrayList<>();
-
-
     private GameGraphics gx = new GameGraphics();
 
     public void render(Graphics g) {
