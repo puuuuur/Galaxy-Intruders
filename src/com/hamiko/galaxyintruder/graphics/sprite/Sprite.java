@@ -19,12 +19,20 @@ public class Sprite {
         this.image = ImageRefactor.createCompatibleImage(img);
         this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
 
-
     }
 
     public Sprite(BufferedImage image) {
         this.image = image;
         this.dimension = new ScaledDimension(image.getWidth(), image.getHeight());
+    }
+
+    /**
+     * Constructor used by copy
+     * @param sprite
+     */
+    private Sprite(Sprite sprite){
+        this.image = sprite.getImage();
+        this.dimension = new ScaledDimension().setSize(sprite.getDimension());
     }
 
     public BufferedImage getImage() {
@@ -38,4 +46,9 @@ public class Sprite {
     public void setImage(BufferedImage image) {
         this.image = image;
     }
+
+    public Sprite copy(){
+        return new Sprite(this.getImage());
+    }
+
 }

@@ -2,6 +2,7 @@ package com.hamiko.galaxyintruder.graphics.GUI;
 
 import com.hamiko.galaxyintruder.graphics.GameGraphics;
 import com.hamiko.galaxyintruder.graphics.elements.GraphicElement;
+import com.hamiko.galaxyintruder.graphics.window.Screen;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.physics.Position;
 
@@ -18,8 +19,10 @@ public class ScorePanel extends GraphicElement {
 
     @Override
     public void render(GameGraphics graphics) {
+
         graphics.getGraphics().setFont(ps2p);
         graphics.getGraphics().setColor(Color.WHITE);
+
         graphics.drawString("SCORE: " + score, this.getPosition().x, this.getPosition().y);
     }
 

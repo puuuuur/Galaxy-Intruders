@@ -1,6 +1,6 @@
 package com.hamiko.galaxyintruder.statemachine.states;
 
-import com.hamiko.galaxyintruder.entities.enemies.BasicSmallShip;
+import com.hamiko.galaxyintruder.entities.enemies.small.BasicSmallShip;
 import com.hamiko.galaxyintruder.entities.player.MainGun;
 import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.graphics.view.GameView;

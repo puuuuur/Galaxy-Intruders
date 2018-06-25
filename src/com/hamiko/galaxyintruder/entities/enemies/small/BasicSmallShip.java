@@ -1,7 +1,9 @@
-package com.hamiko.galaxyintruder.entities.enemies;
+package com.hamiko.galaxyintruder.entities.enemies.small;
 
 import com.hamiko.galaxyintruder.ai.BasicSmallShipAI;
 import com.hamiko.galaxyintruder.ai.Behavior;
+import com.hamiko.galaxyintruder.entities.enemies.Enemy;
+import com.hamiko.galaxyintruder.entities.enemies.Gun;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.graphics.manager.enemies.BasicSmallShipGraphics;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;

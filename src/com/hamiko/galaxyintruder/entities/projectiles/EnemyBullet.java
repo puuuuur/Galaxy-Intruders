@@ -22,23 +22,21 @@ public class EnemyBullet extends Projectile {
     public EnemyBullet(int x, int y, GameLevel level) {
         super(level);
 
-        spriteManager.rotateSprite(0, 0);
-
         setLocation(x, y);
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
+        getGraphics().setCurrentSprite(spriteManager.getAnimations().down());
         level.getProjectilesPool().add(this);
         SoundManager p = new SoundManager();
         p.loadSoundEffects("laser", "res/sounds/blaster-firing.wav");
         p.playSound("laser");
+
     }
 
     @Override
     public void update() {
 
-
         Player player = level.getPlayer();
-
 
         for (HitBox box : player.getHitBoxManager().getHitBoxes()) {
 
@@ -55,7 +53,6 @@ public class EnemyBullet extends Projectile {
             }
 
         }
-
 
         if (getY() >= Screen.getInstance().getHeight()) {
             isKilled = true;

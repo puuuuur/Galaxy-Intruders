@@ -13,7 +13,7 @@ public class PlayerGraphics extends GraphicsManager {
     public PlayerGraphics() {
 
         spriteSheet = SpriteSheetContainer.getSpriteSheet("res/entities/player/PlaneOne.png", 32, 2, 1);
-        animation = new PlayerAnimation();
+        animation = new PlayerAnimation(spriteSheet);
         this.setCurrentSprite(this.getSpriteSheet().getSprite(0, 0));
         this.setDefaultSprite(this.getSpriteSheet().getSprite(0, 0));
 
