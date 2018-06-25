@@ -4,7 +4,7 @@ import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheet;
 
 public class AnimationStudio {
 
-    private SpriteSheet spriteSheet;
+    SpriteSheet spriteSheet;
 
     public AnimationStudio(SpriteSheet spriteSheet) {
         this.spriteSheet = spriteSheet;
@@ -14,8 +14,9 @@ public class AnimationStudio {
         return spriteSheet;
     }
 
-    public void setSpriteSheet(SpriteSheet spriteSheet) {
+    public AnimationStudio setSpriteSheet(SpriteSheet spriteSheet) {
         this.spriteSheet = spriteSheet;
+        return this;
     }
 
 }

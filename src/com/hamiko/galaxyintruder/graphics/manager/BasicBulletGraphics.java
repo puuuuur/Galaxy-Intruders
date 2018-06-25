@@ -1,7 +1,6 @@
 package com.hamiko.galaxyintruder.graphics.manager;
 
-import com.hamiko.galaxyintruder.entities.projectiles.EnemyBulletAnimation;
-import com.hamiko.galaxyintruder.graphics.animation.AnimationStudio;
+import com.hamiko.galaxyintruder.entities.enemies.small.BasicBulletAnimation;
 import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
 import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheet;
@@ -10,17 +9,18 @@ import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheetContainer;
 public class BasicBulletGraphics extends GraphicsManager {
 
     private SpriteSheet spritesSheet;
-    private EnemyBulletAnimation animation;
+    private BasicBulletAnimation animation;
 
     public BasicBulletGraphics() {
 
         spritesSheet = SpriteSheetContainer.getSpriteSheet("res/entities/projectiles/BasicBullet.png", 8, 1, 1);
+        animation = new BasicBulletAnimation(spritesSheet);
+
+//        setCurrentSprite(animation.down());
+//        setDefaultSprite(animation.down());
+
         this.setCurrentSprite(this.getSpriteSheet().getSprite(0, 0));
         this.setDefaultSprite(this.getSpriteSheet().getSprite(0, 0));
-
-        animation = new EnemyBulletAnimation(spritesSheet);
-
-        this.setCurrentSprite(animation.bulletDown());
 
     }
 
@@ -30,7 +30,7 @@ public class BasicBulletGraphics extends GraphicsManager {
     }
 
     @Override
-    public AnimationStudio getAnimations() {
+    public BasicBulletAnimation getAnimations() {
         return animation;
     }
 

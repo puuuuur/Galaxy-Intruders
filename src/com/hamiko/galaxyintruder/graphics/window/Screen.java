@@ -14,7 +14,7 @@ public class Screen extends JFrame implements Runnable {
 
     private static Screen instance = new Screen();
     private GameView activeView;
-    private Resolution currentResolution = Resolution._270p;
+    private Resolution currentResolution = Resolution._720p;
     //private final Color BACKGROUND_COLOR = new Color(48, 54, 85);
 
     private final Color BACKGROUND_COLOR = Color.BLACK;
@@ -38,7 +38,7 @@ public class Screen extends JFrame implements Runnable {
 
     private Screen() {
 
-//        setUndecorated(true);
+        //setUndecorated(true);
         setResizable(false);
         setFocusable(true);
         setBackground(Color.BLACK);

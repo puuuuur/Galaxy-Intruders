@@ -1,7 +1,5 @@
 package com.hamiko.galaxyintruder.system;
 
-import com.hamiko.galaxyintruder.graphics.Drawable;
-import com.hamiko.galaxyintruder.graphics.GameGraphics;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 import com.hamiko.galaxyintruder.physics.GameScale;
 

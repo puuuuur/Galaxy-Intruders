@@ -12,10 +12,9 @@ public class BasicSmallShipGraphics extends GraphicsManager {
     public BasicSmallShipGraphics() {
 
         spriteSheet = SpriteSheetContainer.getSpriteSheet("res/entities/enemies/SmallPlane.png", 16, 1, 1);
-        setCurrentSprite(spriteSheet.getSprite(0, 0));
 
-        this.setCurrentSprite(this.getSpriteSheet().getSprite(0, 0));
-        this.setDefaultSprite(this.getSpriteSheet().getSprite(0, 0));
+        setCurrentSprite(spriteSheet.getSprite(0, 0));
+        setDefaultSprite(spriteSheet.getSprite(0, 0));
 
     }
 

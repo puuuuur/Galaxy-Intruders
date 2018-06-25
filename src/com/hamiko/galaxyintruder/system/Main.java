@@ -2,23 +2,28 @@ package com.hamiko.galaxyintruder.system;
 
 import com.hamiko.galaxyintruder.game.Game;
 import com.hamiko.galaxyintruder.resource.ResourceHandler;
+import com.hamiko.galaxyintruder.sound.BackgroundSound;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
-
+import javafx.embed.swing.JFXPanel;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        new JFXPanel();
+        BackgroundSound bgs = new BackgroundSound();
+        bgs.run();
+
         //TODO window before game start for resolution and fullscreen setting
         ResourceHandler.preload();
 
-        var game = new Game(
+        Game game = new Game(
                 Screen.getInstance(),
                 GameStateMachine.getInstance()
         );
 
-        var gameThread = new Thread(game, "GAME_THREAD");
+        Thread gameThread = new Thread(game, "GAME_THREAD");
         game.setGameThread(gameThread);
         gameThread.start();
 

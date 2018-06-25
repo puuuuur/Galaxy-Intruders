@@ -15,7 +15,6 @@ public abstract class SpaceShip extends Entity {
         this.maxHealth = health;
     }
 
-
     public void takeDamage(int dmg) {
         isDamaged = true;
         setHealth(getHealth() - dmg);
