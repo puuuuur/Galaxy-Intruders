@@ -3,5 +3,6 @@ package com.hamiko.galaxyintruder.statemachine;
 public enum State {
     GAME_PLAY,
     PAUSE,
-    MENU
+    MENU,
+    GAME_OVER,
 }

@@ -7,6 +7,8 @@ import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
+import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
+import com.hamiko.galaxyintruder.statemachine.State;
 
 public class Player extends SpaceShip {
 
@@ -17,7 +19,7 @@ public class Player extends SpaceShip {
 
     public Player(SpaceShipInput input, GameLevel level, MainGun gun) {
 
-        super(level, 200);
+        super(level, 10);
 
         this.mainGun = gun;
         this.controls = new ControlMechanic(this, input);
@@ -56,7 +58,7 @@ public class Player extends SpaceShip {
 
         if (getHealth() <= 0) {
 
-            System.out.println("TRIGGER GAME OVER");
+            GameStateMachine.getInstance().setActiveState(State.GAME_OVER);
             //TODO tell the scenes that a game over has occurred
 
         }

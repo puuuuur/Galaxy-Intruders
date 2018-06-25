@@ -34,21 +34,18 @@ public class PauseMenu {
 
         if (currentCursorPosition == CursorPosition.START) {
             currentCursorPosition = CursorPosition.EXIT;
-            cursor.getPosition().setLocation(originalCursorPosition.x, originalCursorPosition.y + GameScale.yScale(40));
+            cursor.getPosition().setLocation(originalCursorPosition.x, originalCursorPosition.y + GameScale.yScale(60));
         } else {
 
-            if(currentCursorPosition == CursorPosition.EXIT){
+            cursor.getPosition().translate(0, -20);
+
+            if (currentCursorPosition == CursorPosition.EXIT) {
                 currentCursorPosition = CursorPosition.OPTION;
-            }else if (currentCursorPosition == CursorPosition.OPTION){
+            } else if (currentCursorPosition == CursorPosition.OPTION) {
                 currentCursorPosition = CursorPosition.RESUME;
-            }else if (currentCursorPosition == CursorPosition.RESUME){
+            } else if (currentCursorPosition == CursorPosition.RESUME) {
                 currentCursorPosition = CursorPosition.START;
             }
-
-            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION
-                    ? CursorPosition.START
-                    : CursorPosition.OPTION;
-            cursor.getPosition().translate(0, -20);
 
         }
 
@@ -63,17 +60,13 @@ public class PauseMenu {
 
             cursor.getPosition().translate(0, 20);
 
-            if(currentCursorPosition == CursorPosition.START){
+            if (currentCursorPosition == CursorPosition.START) {
                 currentCursorPosition = CursorPosition.RESUME;
-            }else if (currentCursorPosition == CursorPosition.RESUME){
+            } else if (currentCursorPosition == CursorPosition.RESUME) {
                 currentCursorPosition = CursorPosition.OPTION;
-            }else if (currentCursorPosition == CursorPosition.OPTION){
+            } else if (currentCursorPosition == CursorPosition.OPTION) {
                 currentCursorPosition = CursorPosition.EXIT;
             }
-
-//            currentCursorPosition = currentCursorPosition == CursorPosition.OPTION
-//                    ? CursorPosition.EXIT
-//                    : CursorPosition.OPTION;
 
         }
 
@@ -81,12 +74,18 @@ public class PauseMenu {
 
     private void confirm() {
 
-        if (currentCursorPosition == CursorPosition.START) {
-            GameStateMachine.getInstance().setActiveState(State.GAME_PLAY);
-        } else if (currentCursorPosition == CursorPosition.OPTION) {
-            System.out.println("OPEN OPTIONS MENU");
-        } else if (currentCursorPosition == CursorPosition.EXIT) {
-            System.exit(0);//TODO cleaner exit, like saving stuff
+        switch (currentCursorPosition) {
+            case START:
+                GameStateMachine.getInstance().restartGameState();
+            case RESUME:
+                GameStateMachine.getInstance().setActiveState(State.GAME_PLAY);
+                break;
+            case OPTION:
+                System.out.println("OPEN OPTIONS MENU");
+                break;
+            case EXIT:
+                System.exit(0);//TODO cleaner exit, like saving stuff
+                break;
         }
 
     }

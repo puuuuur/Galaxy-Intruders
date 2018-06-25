@@ -82,6 +82,7 @@ public class Screen extends JFrame implements Runnable {
                 event.fire();
                 Frame frame = (Frame) e.getSource();
                 frame.dispose();
+                System.exit(0);
 
             }
 
