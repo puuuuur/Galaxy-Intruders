@@ -36,7 +36,7 @@ public class GamePlayState extends GameState {
 
         SpaceShipInput cont = (SpaceShipInput)this.input;
         if(cont.pause()){
-            GameStateMachine.getInstance().setActiveState(State.MENU);
+            GameStateMachine.getInstance().setActiveState(State.PAUSE);
         }
 
         activeLevel.update();

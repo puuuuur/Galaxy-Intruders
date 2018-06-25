@@ -22,10 +22,12 @@ public class ControlMechanic {
     private Sprite playerLeft;
 
     public ControlMechanic(Player player, SpaceShipInput input) {
+
         this.player = player;
         this.input = input;
         //TODO show sprites with animation manager
         playerLeft = new Sprite(ImageRefactor.flipHorizontally(player.getGraphics().getSpriteSheet().getSprite(0, 1).getImage()));
+
     }
 
     //TODO make this properly
@@ -36,11 +38,14 @@ public class ControlMechanic {
         speed *= GameScale.interpolation();
 
         if (input.left() && input.right()) {
+
             player.setX(player.getX());
             rightAccel = 0;
             leftAccel = 0;
             player.getGraphics().setCurrentSprite(player.getGraphics().getSpriteSheet().getSprite(0,0));
+
         } else if ((input.left() || input.right())) {
+
 
             if (input.left()) {
 

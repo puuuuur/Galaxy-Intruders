@@ -22,15 +22,17 @@ public class EnemyBullet extends Projectile {
     public EnemyBullet(int x, int y, GameLevel level) {
         super(level);
 
-        spriteManager.rotateSprite(0, 0);
+        //spriteManager.rotateSprite(0, 0);
 
         setLocation(x, y);
         this.level = level;
         this.hitBoxManager = new SimpleHitBoxManager(this);
         level.getProjectilesPool().add(this);
+
         SoundManager p = new SoundManager();
         p.loadSoundEffects("laser", "res/sounds/blaster-firing.wav");
         p.playSound("laser");
+
     }
 
     @Override

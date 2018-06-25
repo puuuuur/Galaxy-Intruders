@@ -22,7 +22,7 @@ public class GameStateMachine {
 
     private GameStateMachine() {
 
-        statesContainer.put(State.PAUSE, new PauseState(new GameView(), new PauseInput()));
+        statesContainer.put(State.PAUSE, new PauseState(new GameView(), new MenuInput()));
         statesContainer.put(State.MENU, new MenuState(new GameView(), new MenuInput()));
         statesContainer.put(State.GAME_PLAY, new GamePlayState(new GameView(), new SpaceShipInput()));
 

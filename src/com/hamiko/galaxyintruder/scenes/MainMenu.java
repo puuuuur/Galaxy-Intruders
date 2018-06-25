@@ -71,7 +71,7 @@ public class MainMenu {
         } else if (currentCursorPosition == CursorPosition.OPTION) {
             System.out.println("OPEN OPTIONS MENU");
         } else if (currentCursorPosition == CursorPosition.EXIT) {
-            System.exit(0);//TODO cleaner exit, like saving shit
+            System.exit(0);//TODO cleaner exit, like saving stuff
         }
     }
 

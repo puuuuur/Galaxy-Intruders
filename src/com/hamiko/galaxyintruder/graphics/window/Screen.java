@@ -38,7 +38,7 @@ public class Screen extends JFrame implements Runnable {
 
     private Screen() {
 
-        setUndecorated(true);
+//        setUndecorated(true);
         setResizable(false);
         setFocusable(true);
         setBackground(Color.BLACK);
@@ -46,8 +46,8 @@ public class Screen extends JFrame implements Runnable {
 
         //TODO add native resolution to resolution map
         Dimension dimension = resolutions.getResolution(currentResolution);
-        Dimension nativeResolution = Toolkit.getDefaultToolkit().getScreenSize();
-        dimension = nativeResolution;
+        //Dimension nativeResolution = Toolkit.getDefaultToolkit().getScreenSize();
+        //dimension = nativeResolution;
         
         canvas.setBackground(BACKGROUND_COLOR);
         canvas.setSize(dimension);
