@@ -19,7 +19,6 @@ public class MenuControls {
 
     private enum Event {UP, DOWN, CONFIRM, CANCEL}
 
-
     public MenuControls(MenuInput input) {
         this.input = input;
     }

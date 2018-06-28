@@ -9,6 +9,8 @@ public class MenuInput extends InputHandler {
         keyMap.put(KeyEvent.VK_W, false);
         keyMap.put(KeyEvent.VK_S, false);
         keyMap.put(KeyEvent.VK_C, false);
+        keyMap.put(KeyEvent.VK_UP, false);
+        keyMap.put(KeyEvent.VK_DOWN, false);
         keyMap.put(KeyEvent.VK_SPACE, false);
         keyMap.put(KeyEvent.VK_ENTER, false);
         keyMap.put(KeyEvent.VK_ESCAPE, false);
@@ -16,11 +18,11 @@ public class MenuInput extends InputHandler {
     }
 
     public boolean up() {
-        return keyMap.get(KeyEvent.VK_W);
+        return keyMap.get(KeyEvent.VK_W) || keyMap.get(KeyEvent.VK_UP);
     }
 
     public boolean down() {
-        return keyMap.get(KeyEvent.VK_S);
+        return keyMap.get(KeyEvent.VK_S) || keyMap.get(KeyEvent.VK_DOWN);
     }
 
     public boolean confirm() {

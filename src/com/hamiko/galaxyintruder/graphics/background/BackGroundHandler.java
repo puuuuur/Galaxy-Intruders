@@ -17,7 +17,6 @@ public class BackGroundHandler implements Drawable {
         this.first = new Background(new Position(0, 0));
         int offsetY = (int) (first.getImage().getHeight() / GameScale.yScale());
         this.second = new Background(new Position(0, -offsetY));
-
         heightOffset = first.getImage().getHeight();
 
     }

@@ -21,11 +21,9 @@ public abstract class GraphicsManager {
         return currentSprite;
     }
 
-
     protected void setDefaultSprite(Sprite defaultSprite) {
         this.defaultSprite = defaultSprite;
     }
-
 
     public void setCurrentSprite(Sprite currentSprite) {
         this.currentSprite = currentSprite;

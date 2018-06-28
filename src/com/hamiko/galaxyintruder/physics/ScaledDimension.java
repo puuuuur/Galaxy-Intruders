@@ -8,6 +8,10 @@ public class ScaledDimension extends Dimension {
         super();
     }
 
+    public ScaledDimension(int width, int height, double scale) {
+        super((int) (width * GameScale.xScale() * scale), (int) (height * GameScale.yScale() * scale));
+    }
+
     public ScaledDimension(int width, int height) {
         super((int) (width * GameScale.xScale()), (int) (height * GameScale.yScale()));
     }

@@ -5,6 +5,7 @@ import com.hamiko.galaxyintruder.entities.SpaceShip;
 import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.entities.projectiles.Projectile;
 import com.hamiko.galaxyintruder.graphics.background.Background;
+import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
@@ -39,8 +40,11 @@ public class GameGraphics {
 
     public void drawEntity(Entity entity) {
 
+        Sprite sprite = entity.getGraphics().getCurrentSprite();
+        if(sprite == null)return;
+
         graphics.drawImage(
-                entity.getGraphics().getCurrentSprite().getImage(),
+                sprite.getImage(),
                 entity.getX() - entity.getWidth() / 2,
                 entity.getY() - entity.getHeight() / 2,
                 entity.getWidth(),
@@ -48,13 +52,8 @@ public class GameGraphics {
                 screen
         );
 
-        //debug(entity);
+//        debug(entity);
 
-    }
-
-    private void debug(Entity entity) {
-        renderHitBox(entity, Color.yellow);
-        renderPivot(entity, Color.RED);
     }
 
     public void drawBackground(Background background) {
@@ -72,17 +71,21 @@ public class GameGraphics {
 
     private void drawHealthBar(SpaceShip ship) {
 
-        if (ship.isDamaged()) {
+        double healthRelation = (double) ship.getHealth() / ship.getMaxHealth();
+        if (healthRelation < 0){
+            return;
+        }
+
+        if (healthRelation > 0 && ship.isDamaged()) {
 
             int playerOffset = 0;
             Color healthColor = Color.GREEN;
 
-            if(ship instanceof Player){
+            if (ship instanceof Player) {
                 playerOffset = ship.getHeight() + GameScale.yScale(4);
                 healthColor = Color.CYAN;
             }
 
-            //RED
             graphics.setColor(Color.RED);
             graphics.fillRect(
                     ship.getX() - ship.getWidth() / 2,
@@ -91,12 +94,16 @@ public class GameGraphics {
                     GameScale.yScale(2)
             );
 
-            //GREEN
             graphics.setColor(healthColor);
+            int remainingHealth = ship.getWidth() * ship.getHealth() / ship.getMaxHealth();
+
+            healthColor = (double) ship.getHealth() / ship.getMaxHealth() <= .4d ? Color.ORANGE : healthColor;
+            graphics.setColor(healthColor);
+
             graphics.fillRect(
                     ship.getX() - ship.getWidth() / 2,
                     playerOffset + ship.getY() - (int) (ship.getHeight() * .6d),
-                    ship.getWidth() * ship.getHealth() / ship.getMaxHealth(),
+                    remainingHealth,
                     GameScale.yScale(2)
             );
 
@@ -142,6 +149,11 @@ public class GameGraphics {
 
         }
 
+    }
+
+    private void debug(Entity entity) {
+        renderHitBox(entity, Color.yellow);
+        renderPivot(entity, Color.RED);
     }
 
 }

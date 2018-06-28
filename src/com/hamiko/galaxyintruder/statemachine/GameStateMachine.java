@@ -15,9 +15,9 @@ import java.util.Map;
 public class GameStateMachine {
 
     private static GameStateMachine instance = new GameStateMachine();
+    private Map<State, GameState> statesContainer = new HashMap<>();
     private GameState activeState;
 
-    private Map<State, GameState> statesContainer = new HashMap<>();
 
     private GameStateMachine() {
 
@@ -43,7 +43,6 @@ public class GameStateMachine {
         this.activeState.getInput().resetInput();
 
         //TODO Proper key listener handling
-        //IDEA: keep th same input, just change the map
         Screen.getInstance().getCanvas().removeKeyListener(activeState.getInput());
         this.activeState = statesContainer.get(gameState);
         Screen.getInstance().getCanvas().addKeyListener(activeState.getInput());

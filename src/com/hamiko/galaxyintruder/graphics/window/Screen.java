@@ -38,15 +38,10 @@ public class Screen extends JFrame {
 
     public void init() {
 
-        //setUndecorated(true);
         setResizable(false);
         setFocusable(true);
         setBackground(Color.BLACK);
         setTitle("Galaxy Intruders");
-
-        //TODO add native resolution to resolution map
-        //Dimension nativeResolution = Toolkit.getDefaultToolkit().getScreenSize();
-        //dimension = nativeResolution;
 
         Dimension dimension = getResolution();
 
@@ -117,7 +112,6 @@ public class Screen extends JFrame {
 
         Dimension resolution;
 
-
         if (isFullScreen) {
             setUndecorated(true);
             resolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -131,6 +125,20 @@ public class Screen extends JFrame {
 
     public void setFullScreen(boolean fullScreen) {
         isFullScreen = fullScreen;
+    }
+
+    /**
+     * @return Screen width with calculated with scaling factor
+     */
+    public int getTrueWidth(){
+        return Constant.BASE_WIDTH / GameScale.SCALING_FACTOR;
+    }
+
+    /**
+     * @return Screen height with calculated with scaling factor
+     */
+    public int getTrueHeight(){
+        return Constant.BASE_HEIGHT / GameScale.SCALING_FACTOR;
     }
 
 }

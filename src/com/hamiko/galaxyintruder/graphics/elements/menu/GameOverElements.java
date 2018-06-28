@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class GameOverElements extends GraphicsGroup {
 
-    private ArrayList<GraphicElement> el;
-
+    private ArrayList<GraphicElement> elements;
     public GameOverElements(Position position) {
         super(position);
     }
@@ -18,7 +17,7 @@ public class GameOverElements extends GraphicsGroup {
     @Override
     public ArrayList<GraphicElement> construct() {
 
-        el = new ArrayList<>();
+        elements = new ArrayList<>();
 
         GraphicText gameOverTitle = new GraphicText(new Position(0, 0), getPosition())
                 .setFontSize(20)
@@ -33,17 +32,17 @@ public class GameOverElements extends GraphicsGroup {
                 .setFontSize(10)
                 .setText("return to the Menu.");
 
-        el.add(gameOverTitle);
-        el.add(scoreText);
-        el.add(toMenuText1);
-        el.add(toMenuText2);
+        elements.add(gameOverTitle);
+        elements.add(scoreText);
+        elements.add(toMenuText1);
+        elements.add(toMenuText2);
 
-        return el;
+        return elements;
 
     }
 
     public void setScore(int score) {
-        ((GraphicText)el.get(1)).setText("Final Score: " + score);
+        ((GraphicText) elements.get(1)).setText("Final Score: " + score);
     }
 
 }

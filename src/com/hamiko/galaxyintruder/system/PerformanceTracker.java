@@ -17,7 +17,7 @@ public class PerformanceTracker {
         g.setFont(font);
         g.drawString(
                 "UPS: " + ups + " FPS: " + fps,
-                Screen.getInstance().getCanvas().getWidth() - GameScale.xScale(80),
+                Screen.getInstance().getCanvas().getWidth() - GameScale.xScale(83),
                 GameScale.xScale(6)
         );
 

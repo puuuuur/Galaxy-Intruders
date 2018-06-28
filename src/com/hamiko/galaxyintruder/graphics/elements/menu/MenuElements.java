@@ -18,7 +18,6 @@ public class MenuElements extends GraphicsGroup {
 
         ArrayList<GraphicElement> el = new ArrayList<>();
 
-        //TODO consider using different languages (german, english etc.)
         GraphicText gameTitle = new GraphicText(new Position(0, 0), getPosition())
                 .setFontSize(20)
                 .setText("Galaxy Intruders");

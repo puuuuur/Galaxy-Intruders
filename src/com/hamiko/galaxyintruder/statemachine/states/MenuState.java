@@ -15,7 +15,6 @@ public class MenuState extends GameState {
     public MenuState(GameView view, MenuInput input) {
         super(view, input);
 
-//        MenuElements menuText = new OptionsElement(new Position(100, 100));
         MenuElements menuText = new MenuElements(new Position(100, 100));
         MenuCursor cursor = new MenuCursor(new Position(-14, 30), menuText.getPosition());
         MenuControls controls = new MenuControls(input);
@@ -23,13 +22,11 @@ public class MenuState extends GameState {
         mainMenu = new MainMenu(controls, cursor);
         view.addElements(menuText, cursor);
 
-
     }
 
     @Override
     public void update() {
         mainMenu.update();
     }
-
 
 }

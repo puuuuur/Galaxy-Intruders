@@ -1,11 +1,13 @@
 package com.hamiko.galaxyintruder.entities.projectiles;
 
+import com.hamiko.galaxyintruder.entities.effect.Explosion;
 import com.hamiko.galaxyintruder.entities.player.Player;
 import com.hamiko.galaxyintruder.graphics.manager.BasicBulletGraphics;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.hitbox.HitBox;
 import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.hitbox.SimpleHitBoxManager;
+import com.hamiko.galaxyintruder.physics.Position;
 import com.hamiko.galaxyintruder.scenes.GameLevel;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
@@ -36,7 +38,7 @@ public class EnemyBullet extends Projectile {
 
     @Override
     public void update() {
-
+        //TODO create interface for detecting selected hitboxes
         Player player = level.getPlayer();
 
         for (HitBox box : player.getHitBoxManager().getHitBoxes()) {
@@ -47,17 +49,24 @@ public class EnemyBullet extends Projectile {
                         box.getX() + box.getWidth() / 2 >= hitSurfaceXLeft()
                                 && box.getX() - box.getWidth() / 2 <= hitSurfaceXRight()
                         ) {
+
                     isKilled = true;
+
+                    this.level.getEffectsPool().add(new Explosion(
+                            this.level,
+                            new Position(this.getPosition()),
+                            "res/entities/effects/explosion_small.png"
+                    ));
+
                     player.takeDamage(power);
+
                 }
 
             }
 
         }
 
-        if (getY() >= Screen.getInstance().getHeight()) {
-            isKilled = true;
-        }
+        if (getY() >= Screen.getInstance().getHeight()) isKilled = true;
 
         if (isKilled) {
             level.getProjectilesPool().kill(this);
@@ -84,11 +93,6 @@ public class EnemyBullet extends Projectile {
     @Override
     public HitBoxManager getHitBoxManager() {
         return hitBoxManager;
-    }
-
-    @Override
-    public Owner owner() {
-        return Owner.ENEMY;
     }
 
 }

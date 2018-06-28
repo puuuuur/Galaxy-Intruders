@@ -7,14 +7,12 @@ import com.hamiko.galaxyintruder.physics.Position;
 
 public abstract class Entity {
 
-    //TODO sound effect manager
-    //TODO AI
-
-    private Position position = new Position();
+    private Position position;
     protected GameLevel level;
 
     public Entity(GameLevel level){
         this.level = level;
+        this.position = new Position();
     }
 
     public int getX() {
@@ -38,7 +36,7 @@ public abstract class Entity {
     }
 
     public void setLocation(Position position){
-        position.setLocation(position);
+        this.position.setLocation(position);
     }
 
     public int getWidth() {

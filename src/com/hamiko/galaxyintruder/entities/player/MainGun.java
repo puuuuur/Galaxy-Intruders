@@ -21,6 +21,7 @@ public class MainGun {
         this.level = level;
     }
 
+    //TODO consider triggering gun shots via controller mechanic
     void update(Player player) {
 
         if (input.fire()) {
@@ -32,7 +33,6 @@ public class MainGun {
                         player.getY() + offsetY,
                         level
                 );
-
 
                 fireRoutine = 0;
                 firePreload = 0;
@@ -69,4 +69,5 @@ public class MainGun {
     public void setOffsetY(int offsetY) {
         this.offsetY = offsetY;
     }
+
 }

@@ -10,12 +10,12 @@ public class SpriteSheetContainer {
 
     private static Map<String, SpriteSheet> spriteSheetCache = new HashMap<>();
 
-    public static SpriteSheet getSpriteSheet(String uri, int bit, int xTiles, int yTiles) {
+    public static SpriteSheet getSpriteSheet(String uri, int bit, int xTiles, int yTiles, double scale) {
 
         SpriteSheet spriteSheet = spriteSheetCache.get(uri);
 
         if (spriteSheet == null) {
-            spriteSheet = new SpriteSheet(uri, bit, xTiles, yTiles);
+            spriteSheet = new SpriteSheet(uri, bit, xTiles, yTiles, scale);
             spriteSheetCache.put(uri, spriteSheet);
         }
 
@@ -23,4 +23,9 @@ public class SpriteSheetContainer {
 
     }
 
+    public static SpriteSheet getSpriteSheet(String uri, int bit, int xTiles, int yTiles) {
+        return getSpriteSheet(uri, bit, xTiles, yTiles, 1);
+    }
+
 }
+

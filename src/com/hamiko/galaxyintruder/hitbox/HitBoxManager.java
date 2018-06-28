@@ -11,7 +11,7 @@ public abstract class HitBoxManager {
 
     protected Entity entity;
 
-    HitBoxManager(Entity entity) {
+    public HitBoxManager(Entity entity) {
         this.entity = entity;
     }
 

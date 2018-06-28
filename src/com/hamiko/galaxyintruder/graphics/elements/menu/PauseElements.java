@@ -20,9 +20,13 @@ public class PauseElements extends GraphicsGroup {
 
         final int textSize = 10;
 
+        GraphicText pauseTitle = new GraphicText(new Position(0, 0), getPosition())
+                .setFontSize(20)
+                .setText("GAME PAUSED");
+
         GraphicText startText = new GraphicText(new Position(0, 40), getPosition())
                 .setFontSize(textSize)
-                .setText("Start");
+                .setText("Restart");
 
 
         GraphicText resumeText = new GraphicText(new Position(0, 60), getPosition())
@@ -37,6 +41,7 @@ public class PauseElements extends GraphicsGroup {
                 .setFontSize(textSize)
                 .setText("Exit");
 
+        el.add(pauseTitle);
         el.add(startText);
         el.add(resumeText);
         el.add(optionsText);

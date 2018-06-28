@@ -56,12 +56,57 @@ public class HitBox {
         return this;
     }
 
-    void setOffsetX(int offsetX) {
+    public void setOffsetX(int offsetX) {
         this.offsetX = GameScale.xScale(offsetX);
     }
 
-    void setOffsetY(int offsetY) {
+    public void setOffsetY(int offsetY) {
         this.offsetY = offsetY;
+    }
+
+    //TODO this method needs more testing before deployment
+    public boolean intersects(HitBox other){
+
+        int myX = this.getX() - this.getX() / 2;
+        int myY = this.getY() - this.getY() / 2;
+
+        int myWidth = myX + this.getWidth();
+        int myHeight = myY + this.getHeight();
+
+        int otherX = other.getX() - other.getX() / 2;
+        int otherY = other.getY() - other.getY() / 2;
+
+        int otherWidth = otherX + other.getWidth();
+        int otherHeight = otherY + other.getHeight();
+
+        if(myX <= otherX && myWidth >= otherX){
+
+            if(myY <= otherY && myHeight >= otherY){
+                return true;
+            }
+
+        }else if(myX <= otherWidth && myWidth >= otherWidth){
+
+            if(myY <= other.getY() && myHeight >= otherY){
+                return true;
+            }
+
+        }else if(myX <= otherX && myWidth >= otherX){
+
+            if(myY <= otherHeight && myHeight >= otherHeight){
+                return true;
+            }
+
+        }else if(myX <= otherWidth && myWidth >= otherWidth){
+
+            if(myY <= otherHeight && myHeight >= otherHeight){
+                return true;
+            }
+
+        }
+
+        return false;
+
     }
 
 }

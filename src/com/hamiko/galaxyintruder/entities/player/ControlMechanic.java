@@ -1,13 +1,11 @@
 package com.hamiko.galaxyintruder.entities.player;
 
 import com.hamiko.galaxyintruder.graphics.animation.PlayerAnimation;
-import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
-import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 import com.hamiko.galaxyintruder.input.SpaceShipInput;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
 
-public class ControlMechanic {
+class ControlMechanic {
 
     private SpaceShipInput input;
     private Player player;
@@ -20,21 +18,24 @@ public class ControlMechanic {
 
     private int maxSpeed = 5;
 
-    private Sprite playerLeft;
     private PlayerAnimation animation;
+    private boolean isDisabled = false;
 
-    public ControlMechanic(Player player, SpaceShipInput input) {
-
+    ControlMechanic(Player player, SpaceShipInput input) {
         this.player = player;
         this.input = input;
-        //TODO show sprites with animation manager
-
         animation = player.getGraphics().getAnimations();
-        playerLeft = new Sprite(ImageRefactor.flipHorizontally(player.getGraphics().getSpriteSheet().getSprite(0, 1).getImage()));
+    }
 
+    public void disable(){
+        this.isDisabled = true;
     }
 
     void handlePlayerMovement() {
+
+        if(isDisabled){
+            return;
+        }
 
         speed *= GameScale.interpolation();
 

@@ -5,10 +5,18 @@ import com.hamiko.galaxyintruder.graphics.sprite.Sprite;
 
 public class AnimationStudio {
 
+    private boolean done = false;
+
+    private int lastSpriteX;
+    private int lastSpriteY;
+
+    private int frameX;
+    private int frameY;
+
     private GraphicsManager graphicsManager;
 
-    public AnimationStudio(GraphicsManager spriteSheet) {
-        this.graphicsManager = spriteSheet;
+    public AnimationStudio(GraphicsManager graphicsManager) {
+        this.graphicsManager = graphicsManager;
     }
 
     public GraphicsManager getGraphicsManager() {
@@ -22,6 +30,60 @@ public class AnimationStudio {
 
     public Sprite getDefault() {
         return this.graphicsManager.getSpriteSheet().getSprite(0, 0);
+    }
+
+    public void update(){
+
+    }
+
+    public boolean isDone(){
+        return done;
+    }
+
+    public void setIsDone(){
+        done = true;
+    }
+
+    public int getLastSpriteX() {
+        return lastSpriteX;
+    }
+
+    public int getLastSpriteY() {
+        return lastSpriteY;
+    }
+
+    public int getFrameX() {
+        return frameX;
+    }
+
+    public void setFrameX(int frameX) {
+        this.frameX = frameX;
+    }
+
+    public int getFrameY() {
+        return frameY;
+    }
+
+    public void setFrameY(int frameY) {
+        this.frameY = frameY;
+    }
+
+    /**
+     * Set last sprite sheet indexes in col and row
+     * @param row Row index
+     * @param col Col index
+     */
+    public void setBoundaries(int row, int col) {
+        this.lastSpriteX = row;
+        this.lastSpriteY = col;
+    }
+
+    public int nextFrameX(){
+        return this.frameX++;
+    }
+
+    public int nextFrameY(){
+        return this.frameY++;
     }
 
 }

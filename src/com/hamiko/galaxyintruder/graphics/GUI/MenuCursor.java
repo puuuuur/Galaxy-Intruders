@@ -15,9 +15,9 @@ public class MenuCursor extends GraphicElement {
 
     public MenuCursor(Position position, Position relativePosition) {
         super(position, relativePosition);
+
         oldPosition = new Position(position);
         this.shapePolygon();
-
     }
 
     public MenuCursor(Position position) {

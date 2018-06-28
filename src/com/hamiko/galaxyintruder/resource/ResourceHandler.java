@@ -27,13 +27,8 @@ public class ResourceHandler {
         if (image == null) {
 
             try {
-
-                image = ImageRefactor.createCompatibleImage(
-                        ImageIO.read(new File(uri))
-                );
-
+                image = ImageRefactor.createCompatibleImage(ImageIO.read(new File(uri)));
                 imageCache.put(uri, image);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -56,10 +51,8 @@ public class ResourceHandler {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
         try {
-
             Font ps2p = Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/PressStart2P.ttf"));
             ge.registerFont(ps2p);
-
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }

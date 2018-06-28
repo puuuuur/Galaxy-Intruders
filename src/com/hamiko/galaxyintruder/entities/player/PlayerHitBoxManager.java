@@ -1,11 +1,11 @@
-package com.hamiko.galaxyintruder.hitbox;
+package com.hamiko.galaxyintruder.entities.player;
 
-import com.hamiko.galaxyintruder.entities.player.Player;
+import com.hamiko.galaxyintruder.hitbox.HitBox;
+import com.hamiko.galaxyintruder.hitbox.HitBoxManager;
 import com.hamiko.galaxyintruder.physics.GameScale;
 import com.hamiko.galaxyintruder.physics.Position;
 
 public class PlayerHitBoxManager extends HitBoxManager {
-
 
     public PlayerHitBoxManager(Player player) {
         super(player);

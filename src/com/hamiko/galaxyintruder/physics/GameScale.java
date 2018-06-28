@@ -2,7 +2,7 @@ package com.hamiko.galaxyintruder.physics;
 
 public class GameScale {
 
-    private final static int SCALING_FACTOR = 2;
+    public final static int SCALING_FACTOR = 2;
 
     private static double xScale;
     private static double yScale;
@@ -57,4 +57,5 @@ public class GameScale {
     public static void setFrameInterpolation(double frameInterpolation) {
         GameScale.frameInterpolation = frameInterpolation;
     }
+
 }

@@ -1,7 +1,7 @@
-package com.hamiko.galaxyintruder.graphics.manager;
+package com.hamiko.galaxyintruder.entities.player;
 
-import com.hamiko.galaxyintruder.graphics.animation.AnimationStudio;
 import com.hamiko.galaxyintruder.graphics.animation.PlayerAnimation;
+import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
 import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheet;
 import com.hamiko.galaxyintruder.graphics.sprite.SpriteSheetContainer;
 
@@ -10,7 +10,7 @@ public class PlayerGraphics extends GraphicsManager {
     private SpriteSheet spriteSheet;
     private PlayerAnimation animation;
 
-    public PlayerGraphics() {
+    PlayerGraphics() {
 
         spriteSheet = SpriteSheetContainer.getSpriteSheet("res/entities/player/PlaneOne.png", 32, 2, 1);
         animation = new PlayerAnimation(this);

@@ -5,19 +5,16 @@ import com.hamiko.galaxyintruder.resource.ResourceHandler;
 import com.hamiko.galaxyintruder.sound.BackgroundSound;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.graphics.window.Screen;
-import javafx.embed.swing.JFXPanel;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        new JFXPanel();
-
         BackgroundSound bgs = new BackgroundSound();
         bgs.play();
 
         ResourceHandler.preload();
-        //Screen.getInstance().setFullScreen(true);
+        Screen.getInstance().setFullScreen(true);
         Screen.getInstance().init();
 
         Game game = new Game(

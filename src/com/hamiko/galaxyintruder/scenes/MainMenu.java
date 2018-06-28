@@ -7,8 +7,6 @@ import com.hamiko.galaxyintruder.physics.Position;
 import com.hamiko.galaxyintruder.statemachine.GameStateMachine;
 import com.hamiko.galaxyintruder.statemachine.State;
 
-import java.awt.*;
-
 public class MainMenu {
 
     private MenuControls controls;

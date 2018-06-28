@@ -4,22 +4,18 @@ import com.hamiko.galaxyintruder.graphics.helper.ImageRefactor;
 import com.hamiko.galaxyintruder.resource.ResourceHandler;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class SpriteSheet {
 
     private Sprite[][] sprites;
 
-    SpriteSheet(String uri, int bit, int xTiles, int yTiles) {
-
+    SpriteSheet(String uri, int bit, int xTiles, int yTiles, double scale) {
         sprites = new Sprite[yTiles][xTiles];
+        createSpritesFromSpriteSheet(loadImage(uri), bit, xTiles, yTiles);
+    }
 
-        try {
-            createSpritesFromSpriteSheet(loadImage(uri), bit, xTiles, yTiles);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public SpriteSheet(String uri, int bit, int xTiles, int yTiles) {//TODO remove public
+       this(uri, bit, xTiles, yTiles, 1);
     }
 
     private void createSpritesFromSpriteSheet(BufferedImage spriteSheet, int size, int xTiles, int yTiles) {
@@ -38,7 +34,6 @@ public class SpriteSheet {
                 BufferedImage image = spriteSheet.getSubimage(offsetX, offsetY, width, height);
                 image = ImageRefactor.createCompatibleImage(image);
                 sprites[y][x] = new Sprite(image);
-
                 offsetX += width;
 
             }
@@ -50,11 +45,9 @@ public class SpriteSheet {
 
     }
 
-    private BufferedImage loadImage(String uri) throws IOException {
-
+    private BufferedImage loadImage(String uri) {
         BufferedImage img = ResourceHandler.getImage(uri);
         return ImageRefactor.createCompatibleImage(img);
-
     }
 
     public Sprite getSprite(int y, int x) {

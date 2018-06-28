@@ -15,8 +15,7 @@ public class PauseState extends GameState {
     public PauseState(GameView view, MenuInput input) {
         super(view, input);
 
-        Position labelPos = new Position(200, 80);
-        PauseElements pauseElements = new PauseElements(labelPos );
+        PauseElements pauseElements = new PauseElements(new Position(100, 100) );
         MenuCursor cursor = new MenuCursor(new Position(-14, 30), pauseElements.getPosition());
         MenuControls controls = new MenuControls(input);
 

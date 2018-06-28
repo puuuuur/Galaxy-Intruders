@@ -1,7 +1,7 @@
-package com.hamiko.galaxyintruder.ai;
+package com.hamiko.galaxyintruder.entities.enemies.small;
 
+import com.hamiko.galaxyintruder.ai.Behavior;
 import com.hamiko.galaxyintruder.entities.SpaceShip;
-import com.hamiko.galaxyintruder.entities.enemies.small.BasicSmallShip;
 
 public class BasicSmallShipAI implements Behavior {
 

@@ -81,7 +81,7 @@ public class PauseMenu {
                 GameStateMachine.getInstance().setActiveState(State.GAME_PLAY);
                 break;
             case OPTION:
-                System.out.println("OPEN OPTIONS MENU");
+                System.out.println("OPEN OPTIONS MENU");//TODO implement option menu (volume, difficulty, resolution etc.)
                 break;
             case EXIT:
                 System.exit(0);//TODO cleaner exit, like saving stuff
@@ -91,7 +91,7 @@ public class PauseMenu {
     }
 
     private void cancel() {
-
+        //TODO back from sub menu
     }
 
     public void update() {

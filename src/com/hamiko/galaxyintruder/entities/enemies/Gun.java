@@ -5,7 +5,7 @@ import com.hamiko.galaxyintruder.scenes.GameLevel;
 
 public class Gun {
 
-    GameLevel level;
+    private GameLevel level;
 
     public Gun(GameLevel level) {
         this.level = level;

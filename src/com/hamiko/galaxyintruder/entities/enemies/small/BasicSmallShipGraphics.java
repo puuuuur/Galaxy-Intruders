@@ -1,4 +1,4 @@
-package com.hamiko.galaxyintruder.graphics.manager.enemies;
+package com.hamiko.galaxyintruder.entities.enemies.small;
 
 import com.hamiko.galaxyintruder.graphics.animation.AnimationStudio;
 import com.hamiko.galaxyintruder.graphics.manager.GraphicsManager;
